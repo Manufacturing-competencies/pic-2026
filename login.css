@@ -1,0 +1,1120 @@
+/* =========================================================
+   LOGIN PIC 2026 — FINAL CLEAN CSS
+========================================================= */
+
+*,
+*::before,
+*::after{
+  box-sizing:border-box;
+}
+
+*{
+  margin:0;
+  padding:0;
+}
+
+:root{
+  --blue:#2563eb;
+  --blue-dark:#1d4ed8;
+  --sky:#38bdf8;
+  --pink:#ff5f8f;
+  --text:#12305a;
+  --muted:#64748b;
+  --white:#ffffff;
+}
+
+html{
+  min-height:100%;
+}
+
+body{
+  min-height:100vh;
+  position:relative;
+  overflow-x:hidden;
+  color:var(--text);
+  font-family:"Poppins", sans-serif;
+  background:
+    radial-gradient(circle at 16% 18%, rgba(255,255,255,.96), transparent 25%),
+    radial-gradient(circle at 82% 80%, rgba(56,189,248,.25), transparent 30%),
+    linear-gradient(135deg, #f8fdff 0%, #e8f7ff 34%, #d5f0ff 68%, #c3e9ff 100%);
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* Background ribbons */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  opacity:.9;
+  background:
+    radial-gradient(
+      ellipse at 108% 8%,
+      transparent 0 42%,
+      rgba(255,216,107,.78) 42% 44%,
+      transparent 44% 47%,
+      rgba(255,95,143,.55) 47% 49%,
+      transparent 49% 52%,
+      rgba(34,211,238,.68) 52% 54%,
+      transparent 54% 100%
+    ),
+    radial-gradient(
+      ellipse at -8% 96%,
+      transparent 0 42%,
+      rgba(255,177,43,.52) 42% 44%,
+      transparent 44% 47%,
+      rgba(255,95,143,.42) 47% 49%,
+      transparent 49% 52%,
+      rgba(34,211,238,.60) 52% 54%,
+      transparent 54% 100%
+    );
+  animation:bgRibbonMove 4s ease-in-out infinite alternate;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  filter:blur(2px);
+  background:
+    radial-gradient(circle at 18% 20%, rgba(255,255,255,.84), transparent 18%),
+    radial-gradient(circle at 74% 22%, rgba(56,189,248,.28), transparent 20%),
+    radial-gradient(circle at 78% 82%, rgba(37,99,235,.24), transparent 22%),
+    radial-gradient(circle at 14% 82%, rgba(255,95,143,.18), transparent 18%);
+  animation:bgGlowPulse 3s ease-in-out infinite alternate;
+}
+
+/* Particles */
+.login-particles,
+.login-light-lines{
+  position:fixed;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+.login-particles span{
+  position:absolute;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:rgba(255,255,255,.92);
+  box-shadow:
+    0 0 10px rgba(255,255,255,.95),
+    0 0 20px rgba(56,189,248,.55),
+    0 0 34px rgba(37,99,235,.26);
+  animation:particleMove 3.3s ease-in-out infinite alternate;
+  animation-delay:calc(var(--i) * -.18s);
+}
+
+.login-particles span:nth-child(1){left:10%;top:20%;}
+.login-particles span:nth-child(2){left:22%;top:72%;width:6px;height:6px;}
+.login-particles span:nth-child(3){left:35%;top:14%;width:5px;height:5px;}
+.login-particles span:nth-child(4){left:48%;top:82%;}
+.login-particles span:nth-child(5){left:61%;top:18%;width:6px;height:6px;}
+.login-particles span:nth-child(6){left:75%;top:68%;width:9px;height:9px;}
+.login-particles span:nth-child(7){left:88%;top:30%;width:5px;height:5px;}
+.login-particles span:nth-child(8){left:8%;top:54%;width:6px;height:6px;}
+.login-particles span:nth-child(9){left:92%;top:78%;width:7px;height:7px;}
+.login-particles span:nth-child(10){left:42%;top:38%;width:5px;height:5px;}
+.login-particles span:nth-child(11){left:66%;top:48%;width:6px;height:6px;}
+.login-particles span:nth-child(12){left:18%;top:36%;width:7px;height:7px;}
+
+.login-light-lines::before,
+.login-light-lines::after{
+  content:"";
+  position:absolute;
+  width:46vw;
+  height:2px;
+  border-radius:999px;
+  opacity:.8;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.95),
+    rgba(56,189,248,.70),
+    transparent
+  );
+  box-shadow:
+    0 0 16px rgba(56,189,248,.60),
+    0 0 28px rgba(37,99,235,.24);
+}
+
+.login-light-lines::before{
+  left:-18%;
+  top:28%;
+  transform:rotate(-18deg);
+  animation:lineMoveOne 2.9s ease-in-out infinite;
+}
+
+.login-light-lines::after{
+  right:-18%;
+  bottom:26%;
+  transform:rotate(-18deg);
+  animation:lineMoveTwo 3.2s ease-in-out infinite;
+}
+
+/* Page */
+.login-page{
+  min-height:100vh;
+  position:relative;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:28px 18px;
+}
+
+.login-card{
+  width:min(460px, 100%);
+  position:relative;
+  overflow:hidden;
+  padding:30px;
+  border:1px solid rgba(255,255,255,.95);
+  border-radius:34px;
+  background:linear-gradient(
+    135deg,
+    rgba(255,255,255,.94),
+    rgba(255,255,255,.80)
+  );
+  box-shadow:
+    0 24px 60px rgba(37,99,235,.16),
+    0 0 28px rgba(56,189,248,.12),
+    inset 0 1px 0 rgba(255,255,255,.95);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  animation:loginCardEnter .72s cubic-bezier(.22,.61,.36,1) both;
+}
+
+.login-card::after{
+  content:"";
+  position:absolute;
+  top:-20%;
+  left:-60%;
+  width:72%;
+  height:160%;
+  pointer-events:none;
+  background:linear-gradient(
+    115deg,
+    transparent,
+    rgba(255,255,255,.10),
+    rgba(255,255,255,.44),
+    rgba(255,255,255,.10),
+    transparent
+  );
+  transform:rotate(12deg);
+  animation:cardShineMove 4s ease-in-out infinite;
+}
+
+.login-card > *{
+  position:relative;
+  z-index:2;
+}
+
+/* Header */
+.login-logo{
+  width:fit-content;
+  margin:0 auto 22px;
+  padding:11px 18px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.96);
+  box-shadow:0 10px 28px rgba(37,99,235,.12);
+}
+
+.login-logo img{
+  display:block;
+  width:auto;
+  height:34px;
+  object-fit:contain;
+}
+
+.login-head{
+  margin-bottom:24px;
+  text-align:center;
+}
+
+.login-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:12px;
+  padding:9px 16px;
+  color:#fff;
+  border-radius:999px;
+  font-size:.78rem;
+  font-weight:900;
+  background:linear-gradient(135deg, var(--blue), var(--sky), var(--pink));
+  box-shadow:0 12px 26px rgba(37,99,235,.22);
+}
+
+.login-head h1{
+  color:var(--blue);
+  font-size:clamp(2rem, 7vw, 2.7rem);
+  font-weight:900;
+  line-height:1.08;
+  letter-spacing:-.04em;
+  text-transform:uppercase;
+}
+
+.login-head p{
+  margin-top:10px;
+  color:var(--muted);
+  font-size:.94rem;
+  font-weight:600;
+}
+
+/* Form */
+.login-form{
+  display:grid;
+  gap:16px;
+}
+
+.login-form label > span{
+  display:block;
+  margin-bottom:7px;
+  color:var(--text);
+  font-size:.9rem;
+  font-weight:800;
+}
+
+.input-wrap{
+  position:relative;
+  display:flex;
+  align-items:center;
+}
+
+.input-wrap > i{
+  position:absolute;
+  left:16px;
+  z-index:3;
+  color:var(--blue);
+}
+
+.input-wrap input{
+  width:100%;
+  height:52px;
+  padding:0 48px 0 46px;
+  color:var(--text);
+  border:1px solid rgba(37,99,235,.14);
+  border-radius:20px;
+  outline:none;
+  background:#fff;
+  font-size:.94rem;
+  font-weight:700;
+  box-shadow:0 10px 22px rgba(37,99,235,.06);
+  transition:.22s ease;
+}
+
+.input-wrap input:focus{
+  border-color:rgba(56,189,248,.58);
+  box-shadow:
+    0 12px 28px rgba(37,99,235,.12),
+    0 0 0 4px rgba(56,189,248,.12);
+}
+
+.password-wrap input{
+  padding-right:102px;
+}
+
+.password-action-pill{
+  position:absolute;
+  top:50%;
+  right:7px;
+  z-index:4;
+  display:flex;
+  gap:2px;
+  padding:3px;
+  transform:translateY(-50%);
+  border-radius:15px;
+  background:rgba(37,99,235,.07);
+}
+
+.music-inside,
+.toggle-password{
+  width:34px;
+  height:34px;
+  display:grid;
+  place-items:center;
+  border:0;
+  border-radius:12px;
+  color:var(--blue);
+  cursor:pointer;
+  background:transparent;
+  transition:.2s ease;
+}
+
+.music-inside:hover,
+.toggle-password:hover{
+  background:rgba(37,99,235,.11);
+}
+
+.music-inside.is-playing{
+  background:rgba(37,99,235,.14);
+  animation:musicPulse 1.1s ease-in-out infinite alternate;
+}
+
+/* Submit */
+.login-btn{
+  height:54px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  margin-top:5px;
+  overflow:hidden;
+  color:#fff;
+  border:0;
+  border-radius:999px;
+  cursor:pointer;
+  font-size:1rem;
+  font-weight:900;
+  background:linear-gradient(135deg, var(--blue), var(--sky), var(--pink));
+  box-shadow:0 18px 36px rgba(37,99,235,.24);
+  transition:.22s ease;
+}
+
+.login-btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 24px 46px rgba(37,99,235,.30);
+}
+
+.login-btn:disabled{
+  opacity:.65;
+  cursor:not-allowed;
+  transform:none;
+}
+
+.login-message{
+  min-height:22px;
+  text-align:center;
+  font-size:.88rem;
+  font-weight:800;
+}
+
+.login-message.success{color:#16a34a;}
+.login-message.error{color:#dc2626;}
+
+/* Animations */
+@keyframes bgRibbonMove{
+  to{transform:translate3d(34px,-16px,0) scale(1.03);}
+}
+
+@keyframes bgGlowPulse{
+  to{transform:scale(1.05);}
+}
+
+@keyframes particleMove{
+  from{transform:translate3d(0,0,0) scale(.78);opacity:.35;}
+  to{transform:translate3d(18px,-24px,0) scale(1.15);opacity:.80;}
+}
+
+@keyframes lineMoveOne{
+  from{transform:translateX(-20%) rotate(-18deg);opacity:0;}
+  30%{opacity:.9;}
+  to{transform:translateX(145%) rotate(-18deg);opacity:0;}
+}
+
+@keyframes lineMoveTwo{
+  from{transform:translateX(20%) rotate(-18deg);opacity:0;}
+  30%{opacity:.85;}
+  to{transform:translateX(-145%) rotate(-18deg);opacity:0;}
+}
+
+@keyframes loginCardEnter{
+  from{opacity:0;transform:translateY(26px) scale(.96);}
+  to{opacity:1;transform:translateY(0) scale(1);}
+}
+
+@keyframes cardShineMove{
+  from{transform:translateX(-120%) rotate(12deg);opacity:0;}
+  25%{opacity:.68;}
+  to{transform:translateX(270%) rotate(12deg);opacity:0;}
+}
+
+@keyframes musicPulse{
+  to{box-shadow:0 0 18px rgba(56,189,248,.38);}
+}
+
+/* Mobile */
+@media(max-width:640px){
+  .login-page{
+    padding:22px 15px;
+  }
+
+  .login-card{
+    padding:24px 18px;
+    border-radius:27px;
+  }
+
+  .login-logo{
+    padding:10px 14px;
+  }
+
+  .login-logo img{
+    height:28px;
+  }
+
+  .login-head h1{
+    font-size:clamp(1.9rem, 8vw, 2.35rem);
+  }
+
+  .login-head p{
+    font-size:.88rem;
+  }
+
+  .input-wrap input{
+    height:50px;
+    font-size:.9rem;
+  }
+
+  .login-particles span{
+    width:5px;
+    height:5px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    scroll-behavior:auto !important;
+  }
+}
+
+/* =========================================================
+   FINAL FIX LOGIN RESPONSIVE — ALL DEVICE
+   Tempelkan PALING BAWAH pada login.css
+
+   Cocok untuk:
+   - Desktop dan laptop
+   - Laptop dengan layar pendek
+   - Tablet dan iPad
+   - HP portrait
+   - HP landscape
+========================================================= */
+
+/* =========================================================
+   RESET UKURAN AGAR TIDAK MELEBAR MELEBIHI LAYAR
+========================================================= */
+
+html,
+body{
+  width:100%;
+  min-width:0;
+  min-height:100%;
+}
+
+body{
+  overflow-x:hidden;
+  overflow-y:auto;
+}
+
+.login-page,
+.login-card,
+.login-logo,
+.login-head,
+.login-form,
+.login-form label,
+.input-wrap,
+.password-wrap{
+  min-width:0;
+  max-width:100%;
+}
+
+/* =========================================================
+   AREA HALAMAN LOGIN
+   Bisa di-scroll jika tinggi layar terbatas
+========================================================= */
+
+.login-page{
+  width:100%;
+  min-height:100vh;
+  min-height:100dvh;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:
+    max(20px, env(safe-area-inset-top))
+    max(16px, env(safe-area-inset-right))
+    max(20px, env(safe-area-inset-bottom))
+    max(16px, env(safe-area-inset-left));
+
+  overflow-x:hidden;
+  overflow-y:auto;
+
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior-y:contain;
+}
+
+/* =========================================================
+   KARTU LOGIN
+   Lebar selalu mengikuti ukuran layar
+========================================================= */
+
+.login-card{
+  width:min(460px, calc(100vw - 32px));
+  max-width:100%;
+
+  margin:auto;
+  padding:clamp(20px, 4vw, 30px);
+
+  border-radius:clamp(24px, 4vw, 34px);
+}
+
+/* =========================================================
+   LOGO
+   Tidak terpotong pada layar sempit
+========================================================= */
+
+.login-logo{
+  width:fit-content;
+  max-width:100%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:nowrap;
+
+  gap:clamp(7px, 2vw, 12px);
+
+  margin:0 auto clamp(16px, 3vw, 22px);
+  padding:clamp(8px, 2vw, 11px) clamp(11px, 3vw, 18px);
+
+  overflow:hidden;
+}
+
+.login-logo img{
+  width:auto;
+  max-width:48%;
+  height:clamp(24px, 5vw, 34px);
+
+  object-fit:contain;
+  flex-shrink:1;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.login-head{
+  margin-bottom:clamp(18px, 4vw, 24px);
+}
+
+.login-badge{
+  max-width:100%;
+
+  padding:clamp(7px, 2vw, 9px) clamp(12px, 3vw, 16px);
+
+  font-size:clamp(.68rem, 2.8vw, .78rem);
+  text-align:center;
+}
+
+.login-head h1{
+  font-size:clamp(1.75rem, 8vw, 2.7rem);
+  line-height:1.08;
+  overflow-wrap:anywhere;
+}
+
+.login-head p{
+  margin-top:clamp(7px, 2vw, 10px);
+
+  font-size:clamp(.8rem, 3vw, .94rem);
+  line-height:1.55;
+
+  overflow-wrap:anywhere;
+}
+
+/* =========================================================
+   FORM DAN INPUT
+========================================================= */
+
+.login-form{
+  width:100%;
+  gap:clamp(13px, 3vw, 16px);
+}
+
+.login-form label{
+  width:100%;
+}
+
+.login-form label > span{
+  margin-bottom:6px;
+
+  font-size:clamp(.82rem, 3vw, .9rem);
+}
+
+.input-wrap{
+  width:100%;
+}
+
+.input-wrap input{
+  width:100%;
+  min-width:0;
+
+  height:clamp(48px, 12vw, 52px);
+
+  padding-left:44px;
+  padding-right:16px;
+
+  border-radius:clamp(17px, 4vw, 20px);
+
+  font-size:clamp(.82rem, 3vw, .94rem);
+
+  text-overflow:ellipsis;
+}
+
+.input-wrap > i{
+  left:15px;
+  flex-shrink:0;
+}
+
+/* Password perlu ruang untuk tombol musik dan mata */
+.password-wrap input{
+  padding-right:94px;
+}
+
+.password-action-pill{
+  right:6px;
+
+  gap:1px;
+  padding:3px;
+
+  border-radius:14px;
+}
+
+.music-inside,
+.toggle-password{
+  width:32px;
+  height:32px;
+
+  flex:0 0 32px;
+
+  border-radius:11px;
+
+  font-size:.88rem;
+}
+
+/* =========================================================
+   TOMBOL MASUK
+========================================================= */
+
+.login-btn{
+  width:100%;
+
+  height:clamp(50px, 13vw, 54px);
+
+  margin-top:4px;
+
+  font-size:clamp(.92rem, 3.5vw, 1rem);
+}
+
+/* =========================================================
+   TABLET DAN iPAD
+========================================================= */
+
+@media(max-width:1024px){
+  .login-page{
+    padding:
+      max(18px, env(safe-area-inset-top))
+      max(16px, env(safe-area-inset-right))
+      max(18px, env(safe-area-inset-bottom))
+      max(16px, env(safe-area-inset-left));
+  }
+
+  .login-card{
+    width:min(450px, calc(100vw - 32px));
+  }
+}
+
+/* =========================================================
+   HP
+========================================================= */
+
+@media(max-width:640px){
+  .login-page{
+    align-items:flex-start;
+
+    padding:
+      max(14px, env(safe-area-inset-top))
+      max(12px, env(safe-area-inset-right))
+      max(14px, env(safe-area-inset-bottom))
+      max(12px, env(safe-area-inset-left));
+  }
+
+  .login-card{
+    width:min(100%, 430px);
+
+    margin:auto;
+
+    padding:20px 16px;
+
+    border-radius:25px;
+  }
+
+  .login-logo{
+    margin-bottom:17px;
+    padding:9px 12px;
+  }
+
+  .login-logo img{
+    height:clamp(23px, 7vw, 28px);
+  }
+
+  .login-head{
+    margin-bottom:18px;
+  }
+
+  .login-head h1{
+    font-size:clamp(1.7rem, 8vw, 2.25rem);
+  }
+
+  .login-head p{
+    font-size:.84rem;
+  }
+
+  .login-form{
+    gap:13px;
+  }
+
+  .input-wrap input{
+    height:49px;
+
+    padding-left:42px;
+
+    font-size:.84rem;
+  }
+
+  .password-wrap input{
+    padding-right:91px;
+  }
+
+  .input-wrap > i{
+    left:14px;
+  }
+
+  .music-inside,
+  .toggle-password{
+    width:31px;
+    height:31px;
+
+    flex-basis:31px;
+  }
+
+  .login-btn{
+    height:51px;
+    margin-top:3px;
+  }
+}
+
+/* =========================================================
+   HP SANGAT KECIL
+   Misalnya lebar 320px–380px
+========================================================= */
+
+@media(max-width:380px){
+  .login-page{
+    padding-left:9px;
+    padding-right:9px;
+  }
+
+  .login-card{
+    width:100%;
+
+    padding:18px 13px;
+
+    border-radius:22px;
+  }
+
+  .login-logo{
+    gap:6px;
+
+    padding:8px 10px;
+  }
+
+  .login-logo img{
+    max-width:47%;
+    height:23px;
+  }
+
+  .login-badge{
+    font-size:.65rem;
+    padding:7px 11px;
+  }
+
+  .login-head h1{
+    font-size:1.65rem;
+  }
+
+  .login-head p{
+    font-size:.78rem;
+  }
+
+  .login-form label > span{
+    font-size:.8rem;
+  }
+
+  .input-wrap input{
+    height:47px;
+
+    padding-left:40px;
+
+    font-size:.78rem;
+  }
+
+  .password-wrap input{
+    padding-right:86px;
+  }
+
+  .password-action-pill{
+    right:5px;
+  }
+
+  .music-inside,
+  .toggle-password{
+    width:29px;
+    height:29px;
+
+    flex-basis:29px;
+
+    font-size:.8rem;
+  }
+
+  .login-btn{
+    height:49px;
+
+    font-size:.9rem;
+  }
+}
+
+/* =========================================================
+   LAYAR PENDEK DAN MODE LANDSCAPE
+   Kartu tidak lagi terpotong atas atau bawah
+========================================================= */
+
+@media(max-height:760px){
+  .login-page{
+    align-items:flex-start;
+
+    padding-top:14px;
+    padding-bottom:14px;
+  }
+
+  .login-card{
+    margin:auto;
+  }
+
+  .login-logo{
+    margin-bottom:14px;
+  }
+
+  .login-head{
+    margin-bottom:16px;
+  }
+
+  .login-badge{
+    margin-bottom:9px;
+  }
+
+  .login-head p{
+    margin-top:7px;
+  }
+
+  .login-form{
+    gap:12px;
+  }
+
+  .input-wrap input{
+    height:47px;
+  }
+
+  .login-btn{
+    height:49px;
+  }
+}
+
+/* =========================================================
+   LANDSCAPE HP
+========================================================= */
+
+@media(max-height:540px) and (orientation:landscape){
+  .login-page{
+    display:block;
+
+    padding:
+      max(10px, env(safe-area-inset-top))
+      max(12px, env(safe-area-inset-right))
+      max(10px, env(safe-area-inset-bottom))
+      max(12px, env(safe-area-inset-left));
+  }
+
+  .login-card{
+    width:min(430px, calc(100vw - 24px));
+
+    margin:0 auto;
+
+    padding:16px 15px;
+
+    border-radius:22px;
+  }
+
+  .login-logo{
+    margin-bottom:10px;
+    padding:7px 11px;
+  }
+
+  .login-logo img{
+    height:22px;
+  }
+
+  .login-head{
+    margin-bottom:12px;
+  }
+
+  .login-badge{
+    margin-bottom:7px;
+    padding:6px 11px;
+
+    font-size:.64rem;
+  }
+
+  .login-head h1{
+    font-size:1.55rem;
+  }
+
+  .login-head p{
+    margin-top:5px;
+
+    font-size:.75rem;
+  }
+
+  .login-form{
+    gap:9px;
+  }
+
+  .login-form label > span{
+    margin-bottom:4px;
+
+    font-size:.75rem;
+  }
+
+  .input-wrap input{
+    height:43px;
+
+    font-size:.76rem;
+  }
+
+  .login-btn{
+    height:44px;
+
+    margin-top:2px;
+
+    font-size:.86rem;
+  }
+}
+
+/* =========================================================
+   MENGURANGI ANIMASI PADA DEVICE KECIL
+   Supaya performa lebih ringan
+========================================================= */
+
+@media(max-width:640px){
+  .login-card{
+    animation:loginCardEnter .6s ease both;
+  }
+
+  .login-light-lines{
+    opacity:.58;
+  }
+
+  .login-particles{
+    opacity:.72;
+  }
+}
+
+/* =========================================================
+   LOGIN KEYBOARD MOBILE FIX
+   Agar input dan tombol Masuk tetap mudah digunakan
+   ketika keyboard HP atau tablet muncul
+========================================================= */
+
+@media(max-width:640px){
+  body.keyboard-open .login-page{
+    align-items:flex-start;
+    padding-top:10px;
+    padding-bottom:12px;
+  }
+
+  body.keyboard-open .login-card{
+    margin:0 auto;
+    padding:16px 14px;
+    border-radius:22px;
+  }
+
+  body.keyboard-open .login-logo{
+    margin-bottom:10px;
+    padding:7px 11px;
+  }
+
+  body.keyboard-open .login-logo img{
+    height:22px;
+  }
+
+  body.keyboard-open .login-head{
+    margin-bottom:12px;
+  }
+
+  body.keyboard-open .login-badge{
+    margin-bottom:7px;
+    padding:6px 11px;
+    font-size:.64rem;
+  }
+
+  body.keyboard-open .login-head h1{
+    font-size:1.55rem;
+  }
+
+  body.keyboard-open .login-head p{
+    margin-top:5px;
+    font-size:.76rem;
+    line-height:1.45;
+  }
+
+  body.keyboard-open .login-form{
+    gap:9px;
+  }
+
+  body.keyboard-open .login-form label > span{
+    margin-bottom:4px;
+    font-size:.76rem;
+  }
+
+  body.keyboard-open .input-wrap input{
+    height:43px;
+    font-size:.78rem;
+  }
+
+  body.keyboard-open .login-btn{
+    height:45px;
+    margin-top:2px;
+    font-size:.88rem;
+  }
+}

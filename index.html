@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>PIC 2026 | Paragon Innovation Challenge</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body data-auth="required">
+  <!-- BACKGROUND MUSIC -->
+<audio id="bgMusic" loop preload="auto">
+  <source src="CHAMPIONS.mp3" type="audio/mpeg" />
+</audio>
+
+
+  <div class="bg-ribbon bg-ribbon-left" aria-hidden="true"></div>
+  <div class="bg-ribbon bg-ribbon-right" aria-hidden="true"></div>
+
+ <!-- NAVBAR -->
+<nav class="mini-nav">
+  <a href="index.html" class="brand-logo">
+    <img src="Logo1.jpg" alt="Paragon Innovation Challenge" />
+    <img src="Logo.jpg" alt="Paragon Corp" />
+  </a>
+
+  <div class="nav-menu">
+    <a href="#program">
+      <i class="fa-solid fa-layer-group"></i>
+      Program
+    </a>
+
+    <a href="#pre-form">
+      <i class="fa-solid fa-clipboard-check"></i>
+      Registrasi
+    </a>
+
+    <button class="nav-btn" id="openInfo" type="button">
+      <i class="fa-solid fa-circle-info"></i>
+      Info
+    </button>
+
+    <button
+  class="nav-btn music-nav-btn is-muted"
+  id="musicToggle"
+  type="button"
+  aria-label="Aktifkan musik"
+  title="Aktifkan musik"
+>
+  <i class="fa-solid fa-volume-xmark"></i>
+  <span class="music-nav-text">Music</span>
+</button>
+
+    <button class="nav-btn logout-btn" type="button" data-logout>
+      <i class="fa-solid fa-right-from-bracket"></i>
+      Logout
+    </button>
+  </div>
+</nav>
+
+
+  <!-- POPUP INFO -->
+  <div class="info-popup" id="infoPopup" hidden>
+    <div class="info-backdrop" data-close="true"></div>
+
+    <div class="info-popup-inner">
+      <button
+        class="info-close"
+        id="infoClose"
+        type="button"
+        aria-label="Tutup informasi"
+      >
+        &times;
+      </button>
+
+      <div class="info-slider" id="infoSlider">
+        <article class="info-slide">
+          <img src="POPUP1.png" alt="Informasi PIC 2026" />
+        </article>
+
+        <article class="info-slide">
+          <img src="PICGOTTALENT.png" alt="PIC 2026 Got Talent" />
+        </article>
+
+        <article class="info-slide">
+          <img src="SEMIFINALISSS.png" alt="Informasi Semifinalis PIC 2026" />
+        </article>
+
+        <article class="info-slide">
+          <img src="LOMBAIK.png" alt="Lomba Video Instruksi Kerja" />
+        </article>
+
+        <article class="info-slide">
+          <img src="TICKETPHOTO.png" alt="Informasi Tiket Photobooth PIC 2026" />
+        </article>
+      </div>
+
+      <div class="info-dots" id="infoDots"></div>
+    </div>
+  </div>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero hero-home">
+      <div class="hero-glow"></div>
+
+      <div class="hero-inner">
+        <div class="hero-left">
+          <span class="hero-pill">
+            <i class="fa-solid fa-sparkles"></i>
+            WELCOME
+          </span>
+
+          <h1 class="hero-heading">
+            <span class="hero-highlight">2026</span> PARAGON<br />
+            INNOVATION<br />
+            CHALLENGE
+          </h1>
+
+          <p class="hero-subtitle">
+            Saatnya ide kamu naik panggung — dari gagasan menjadi aksi,
+            dari aksi menjadi inovasi.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#program" class="btn-primary">
+              <i class="fa-solid fa-play"></i>
+              Explore Program
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="hero-illustration">
+            <img
+              src="MASKOD.png"
+              alt="Maskot PIC 2026"
+              class="hero-img-main"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JOURNEY PIC 2025 -->
+    <section class="pic-story-section" id="pic-story">
+      <div class="pic-story-card">
+        <div class="pic-story-content">
+          <span class="pic-story-badge">
+            <i class="fa-solid fa-bolt"></i>
+            JOURNEY PIC 2025
+          </span>
+
+          <h2>
+            Dari Ide Sederhana,<br />
+            Menjadi Dampak Nyata
+          </h2>
+
+          <p>
+            <strong>Paragon Innovation Challenge bukan hanya tentang kompetisi,</strong>
+            tetapi tentang perjalanan ketika ide sederhana mulai berani muncul,
+            dibagikan, lalu dikembangkan menjadi solusi yang lebih berdampak.
+          </p>
+
+          <p>
+            Dari diskusi kecil, proses kolaborasi, hingga panggung apresiasi,
+            PIC menjadi ruang untuk melihat bagaimana gagasan dapat tumbuh
+            menjadi aksi nyata.
+          </p>
+
+          <div class="pic-story-highlight">
+            <i class="fa-solid fa-rocket"></i>
+
+            <span>
+              Inilah cerita tentang keberanian memulai, semangat berinovasi,
+              dan kontribusi untuk menciptakan perubahan yang lebih baik.
+            </span>
+          </div>
+
+          <a href="#review-photo" class="pic-story-btn">
+            <i class="fa-solid fa-images"></i>
+            Lihat Momen PIC 2025
+          </a>
+        </div>
+
+        <div class="pic-story-side">
+          <div class="pic-mini-card card-one">
+            <i class="fa-solid fa-lightbulb"></i>
+            <span>Idea</span>
+          </div>
+
+          <div class="pic-mini-card card-two">
+            <i class="fa-solid fa-users"></i>
+            <span>Collaboration</span>
+          </div>
+
+          <div class="pic-mini-card card-three">
+            <i class="fa-solid fa-trophy"></i>
+            <span>Appreciation</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORM ACCESS -->
+    <section class="pre-form-section" id="pre-form">
+      <div class="pre-form-wrap">
+        <div class="pre-form-head">
+          <span class="pre-form-badge">
+            <i class="fa-solid fa-clipboard-check"></i>
+            FORM ACCESS
+          </span>
+
+          <h2>Pre Event Registration</h2>
+
+          <p>
+            Yuk, menjadi bagian dari Paragon Innovation Challenge 2026!
+          </p>
+        </div>
+
+        <div class="pre-form-grid">
+          <!--
+            GANTI href="#" DENGAN LINK FORM REGISTRASI KEDATANGAN.
+            Setelah link diisi, hapus atribut data-placeholder-link.
+          -->
+          <a
+            href="#"
+            class="pre-form-card"
+            data-placeholder-link
+          >
+            <div class="pre-form-icon">
+              <i class="fa-solid fa-user-check"></i>
+            </div>
+
+            <div class="pre-form-content">
+              <span>FORM</span>
+              <h3>Registrasi Kedatangan</h3>
+              <p>Hallo Innovator hebat, daftar kehadiranmu sekarang!</p>
+            </div>
+
+            <div class="pre-form-arrow">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </div>
+          </a>
+
+          <!--
+            GANTI href="#" DENGAN LINK FORM INNOVATION CORNER.
+            Setelah link diisi, hapus atribut data-placeholder-link.
+          -->
+          <a
+            href="#"
+            class="pre-form-card"
+            data-placeholder-link
+          >
+            <div class="pre-form-icon">
+              <i class="fa-solid fa-store"></i>
+            </div>
+
+            <div class="pre-form-content">
+              <span>FORM</span>
+              <h3>Pendaftaran Innovation Corner</h3>
+
+              <p>
+                Tampilkan ide terbaikmu dan jadilah bagian dari PIC 2026!
+              </p>
+            </div>
+
+            <div class="pre-form-arrow">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHOTO PIC 2025 -->
+    <section class="photo-review-section" id="review-photo">
+      <div class="photo-review-wrap">
+        <div class="photo-review-head">
+          <span class="photo-review-badge">DOKUMENTASI</span>
+
+          <h2>Keseruan PIC 2025</h2>
+
+          <p>
+            Setiap momen menyimpan cerita, kolaborasi, dan langkah kecil
+            menuju inovasi besar.
+          </p>
+        </div>
+
+        <div class="photo-carousel">
+          <button
+            class="photo-nav photo-prev"
+            type="button"
+            aria-label="Foto sebelumnya"
+          >
+            &#10094;
+          </button>
+
+          <div class="photo-track-wrap">
+            <div
+              class="photo-track"
+              data-gallery-range
+              data-start="1"
+              data-end="30"
+              data-label="PIC 2025"
+            ></div>
+          </div>
+
+          <button
+            class="photo-nav photo-next"
+            type="button"
+            aria-label="Foto berikutnya"
+          >
+            &#10095;
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROGRAM -->
+    <section class="section" id="program">
+      <div class="section-head">
+        <span class="section-badge">
+          <i class="fa-solid fa-layer-group"></i>
+          PIC 2026
+        </span>
+
+        <h2>Program Journey</h2>
+
+        <p>
+          Mulai perjalanan inovasimu melalui rangkaian program PIC 2026.
+        </p>
+      </div>
+
+      <div class="program-grid">
+        <a class="program-card" href="5r.html">
+          <div class="program-top">
+            <span>PROGRAM</span>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </div>
+
+          <div
+            class="program-image"
+            style="background-image:url('BGCONTENT2.png')"
+          >
+            <span>QIT DAY</span>
+          </div>
+
+          <div class="program-body">
+            <h3>QIT Day</h3>
+            <p>Awal perjalanan ide-ide keren menuju PIC 2026.</p>
+          </div>
+        </a>
+
+        <a class="program-card" href="Epic.html">
+          <div class="program-top">
+            <span>PROGRAM</span>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </div>
+
+          <div
+            class="program-image"
+            style="background-image:url('BGCONTENT.png')"
+          >
+            <span>PRE EVENT</span>
+          </div>
+
+          <div class="program-body">
+            <h3>Pre Event</h3>
+
+            <p>
+              Ruang eksplorasi, persiapan, dan update seru menuju PIC 2026.
+            </p>
+          </div>
+        </a>
+
+        <a class="program-card" href="SS.html">
+          <div class="program-top">
+            <span>PROGRAM</span>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </div>
+
+          <div
+            class="program-image"
+            style="background-image:url('BGCONTENT1.png')"
+          >
+            <span>MAIN EVENT</span>
+          </div>
+
+          <div class="program-body">
+            <h3>Main Event</h3>
+
+            <p>
+              Saatnya ide terbaik tampil di panggung PIC 2026.
+            </p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- CONTACT PERSON -->
+    <section class="section compact-section" id="contact">
+      <div class="section-head">
+        <span class="section-badge">
+          <i class="fa-solid fa-headset"></i>
+          NEED HELP?
+        </span>
+
+        <h2>Contact Person</h2>
+
+        <p>
+          Hubungi panitia PIC 2026 sesuai kebutuhan informasi kamu.
+        </p>
+      </div>
+
+      <div class="contact-person-grid">
+        <a
+          class="cp-card"
+          href="https://wa.me/6287814045175"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="cp-photo-wrap">
+            <img src="DEDEN.png" alt="Deden" class="cp-photo" />
+          </div>
+
+          <h3 class="cp-name">DEDEN</h3>
+          <p class="cp-role">Event Coordinator</p>
+          <p class="cp-phone">0878 1404 5175</p>
+
+          <p class="cp-info">
+            Bertanggung jawab atas seluruh penyelenggaraan PIC 2026.
+          </p>
+
+          <span class="cp-wa">
+            <i class="fa-brands fa-whatsapp"></i>
+            Chat WhatsApp
+          </span>
+        </a>
+
+        <a
+          class="cp-card"
+          href="https://wa.me/6287814045008"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="cp-photo-wrap">
+            <img src="MILA.png" alt="Mila" class="cp-photo" />
+          </div>
+
+          <h3 class="cp-name">MILA</h3>
+          <p class="cp-role">Participant Support 1</p>
+          <p class="cp-phone">0878 1404 5008</p>
+
+          <p class="cp-info">
+            Membantu validasi peserta, registrasi, perubahan anggota tim,
+            dan konfirmasi kehadiran.
+          </p>
+
+          <span class="cp-wa">
+            <i class="fa-brands fa-whatsapp"></i>
+            Chat WhatsApp
+          </span>
+        </a>
+
+        <a
+          class="cp-card"
+          href="https://wa.me/6287815825017"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="cp-photo-wrap">
+            <img src="DENI.png" alt="Deni" class="cp-photo" />
+          </div>
+
+          <h3 class="cp-name">DENI</h3>
+          <p class="cp-role">Participant Support 2</p>
+          <p class="cp-phone">0878 1582 5017</p>
+
+          <p class="cp-info">
+            Membantu validasi peserta, registrasi, perubahan anggota tim,
+            dan konfirmasi kehadiran.
+          </p>
+
+          <span class="cp-wa">
+            <i class="fa-brands fa-whatsapp"></i>
+            Chat WhatsApp
+          </span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

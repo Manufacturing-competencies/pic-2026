@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Main Event | PIC 2026</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body data-auth="required">
+  <!-- BACKGROUND MUSIC -->
+<audio id="bgMusic" loop preload="auto">
+  <source src="CHAMPIONS.mp3" type="audio/mpeg" />
+</audio>
+
+  <div class="bg-ribbon bg-ribbon-left" aria-hidden="true"></div>
+  <div class="bg-ribbon bg-ribbon-right" aria-hidden="true"></div>
+
+  <nav class="mini-nav">
+    <a href="index.html" class="brand-logo">
+      <img src="Logo1.jpg" alt="Paragon Innovation Challenge" />
+      <img src="Logo.jpg" alt="Paragon Corp" />
+    </a>
+
+    <div class="nav-menu">
+      <a href="index.html">
+        <i class="fa-solid fa-house"></i>
+        Home
+      </a>
+
+      <a href="#finalist-qit">
+        <i class="fa-solid fa-users"></i>
+        Finalis QIT
+      </a>
+
+      <a href="#best-ss">
+        <i class="fa-solid fa-award"></i>
+        Best SS
+      </a>
+
+      <button
+  class="nav-btn music-nav-btn is-muted"
+  id="musicToggle"
+  type="button"
+  aria-label="Aktifkan musik"
+  title="Aktifkan musik"
+>
+  <i class="fa-solid fa-volume-xmark"></i>
+  <span class="music-nav-text">Music</span>
+</button>
+
+      <button class="nav-btn logout-btn" type="button" data-logout>
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Logout
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero hero-main">
+      <div class="hero-glow"></div>
+
+      <div class="hero-inner">
+        <div class="hero-left">
+          <span class="hero-pill">
+            <i class="fa-solid fa-trophy"></i>
+            MAIN EVENT
+          </span>
+
+          <h1 class="hero-heading">
+            <span class="hero-highlight">MAIN EVENT</span><br />
+            PIC 2026
+          </h1>
+
+          <p class="hero-subtitle">
+            Ide kecil hari ini dapat menjadi dampak besar untuk kita semua.
+            Sampaikan gagasanmu dan wujudkan perubahan nyata!
+          </p>
+
+          <div class="hero-actions">
+            <a href="#finalist-qit" class="btn-primary">
+              <i class="fa-solid fa-users"></i>
+              Grand Finalist
+            </a>
+
+            <a href="index.html" class="btn-secondary">
+              <i class="fa-solid fa-house"></i>
+              Back to Home
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="hero-illustration">
+            <img
+              src="MASKOD1.png"
+              alt="Main Event PIC 2026"
+              class="hero-img-main"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+   <!-- =====================================================
+     GRAND FINALIST QIT — INTERACTIVE
+===================================================== -->
+<section class="section finalist-section" id="finalist-qit">
+  <div class="section-head">
+    <span class="section-badge">
+      <i class="fa-solid fa-medal"></i>
+      GRAND FINALIST
+    </span>
+
+    <h2>Grand Finalist Tim QIT</h2>
+
+    <p>
+      Berikan apresiasi untuk tim improvement terbaik.
+      Geser ke kanan untuk melihat seluruh finalis.
+    </p>
+  </div>
+
+  <div class="finalist-rail">
+    <!-- 01 WISANGGENI -->
+    <article
+      class="finalist-card interactive-finalist"
+      data-item-id="QIT-WISANGGENI"
+      data-item-type="QIT"
+      data-item-name="WISANGGENI"
+    >
+      <div class="finalist-image-wrap">
+        <img src="98.png" alt="Finalis QIT WISANGGENI" loading="lazy" />
+        <span class="finalist-gloss" aria-hidden="true"></span>
+
+        <span class="finalist-category">
+          <i class="fa-solid fa-trophy"></i>
+          QIT FINALIST
+        </span>
+      </div>
+
+      <div class="finalist-content">
+        <h3>WISANGGENI</h3>
+
+<div class="finalist-engagement">
+  <button class="like-btn" type="button" data-like-button>
+  <i class="fa-regular fa-heart"></i>
+  <span class="engagement-label">Like</span>
+  <span class="like-count">0</span>
+</button>
+
+<button class="comment-btn" type="button" data-comment-button>
+  <i class="fa-regular fa-comment"></i>
+  <span class="engagement-label">Komentar</span>
+  <span class="comment-count">0</span>
+</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02 SPEKTA -->
+    <article
+      class="finalist-card interactive-finalist"
+      data-item-id="QIT-SPEKTA"
+      data-item-type="QIT"
+      data-item-name="SPEKTA"
+    >
+      <div class="finalist-image-wrap">
+        <img src="99.png" alt="Finalis QIT SPEKTA" loading="lazy" />
+        <span class="finalist-gloss" aria-hidden="true"></span>
+
+        <span class="finalist-category">
+          <i class="fa-solid fa-trophy"></i>
+          QIT FINALIST
+        </span>
+      </div>
+
+      <div class="finalist-content">
+        <h3>SPEKTA</h3>
+
+        <div class="finalist-engagement">
+          <button class="like-btn" type="button" data-like-button>
+  <i class="fa-regular fa-heart"></i>
+  <span class="engagement-label">Like</span>
+  <span class="like-count">0</span>
+</button>
+
+          <button class="comment-btn" type="button" data-comment-button>
+  <i class="fa-regular fa-comment"></i>
+  <span class="engagement-label">Komentar</span>
+  <span class="comment-count">0</span>
+</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03 WAROENG -->
+    <article
+      class="finalist-card interactive-finalist"
+      data-item-id="QIT-WAROENG"
+      data-item-type="QIT"
+      data-item-name="WAROENG"
+    >
+      <div class="finalist-image-wrap">
+        <img src="100.png" alt="Finalis QIT WAROENG" loading="lazy" />
+        <span class="finalist-gloss" aria-hidden="true"></span>
+
+        <span class="finalist-category">
+          <i class="fa-solid fa-trophy"></i>
+          QIT FINALIST
+        </span>
+      </div>
+
+      <div class="finalist-content">
+        <h3>WAROENG</h3>
+
+        <div class="finalist-engagement">
+<button class="like-btn" type="button" data-like-button>
+  <i class="fa-regular fa-heart"></i>
+  <span class="engagement-label">Like</span>
+  <span class="like-count">0</span>
+</button>
+
+          <button class="comment-btn" type="button" data-comment-button>
+  <i class="fa-regular fa-comment"></i>
+  <span class="engagement-label">Komentar</span>
+  <span class="comment-count">0</span>
+</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04 CONAN -->
+    <article
+      class="finalist-card interactive-finalist"
+      data-item-id="QIT-CONAN"
+      data-item-type="QIT"
+      data-item-name="CONAN"
+    >
+      <div class="finalist-image-wrap">
+        <img src="101.png" alt="Finalis QIT CONAN" loading="lazy" />
+        <span class="finalist-gloss" aria-hidden="true"></span>
+
+        <span class="finalist-category">
+          <i class="fa-solid fa-trophy"></i>
+          QIT FINALIST
+        </span>
+      </div>
+
+      <div class="finalist-content">
+        <h3>CONAN</h3>
+
+        <div class="finalist-engagement">
+<button class="like-btn" type="button" data-like-button>
+  <i class="fa-regular fa-heart"></i>
+  <span class="engagement-label">Like</span>
+  <span class="like-count">0</span>
+</button>
+
+<button class="comment-btn" type="button" data-comment-button>
+  <i class="fa-regular fa-comment"></i>
+  <span class="engagement-label">Komentar</span>
+  <span class="comment-count">0</span>
+</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- 05 ALPHA -->
+    <article
+      class="finalist-card interactive-finalist"
+      data-item-id="QIT-ALPHA"
+      data-item-type="QIT"
+      data-item-name="ALPHA"
+    >
+      <div class="finalist-image-wrap">
+        <img src="102.png" alt="Finalis QIT ALPHA" loading="lazy" />
+        <span class="finalist-gloss" aria-hidden="true"></span>
+
+        <span class="finalist-category">
+          <i class="fa-solid fa-trophy"></i>
+          QIT FINALIST
+        </span>
+      </div>
+
+      <div class="finalist-content">
+        <h3>ALPHA</h3>
+
+        <div class="finalist-engagement">
+         <button class="like-btn" type="button" data-like-button>
+  <i class="fa-regular fa-heart"></i>
+  <span class="engagement-label">Like</span>
+  <span class="like-count">0</span>
+</button>
+
+          <button class="comment-btn" type="button" data-comment-button>
+  <i class="fa-regular fa-comment"></i>
+  <span class="engagement-label">Komentar</span>
+  <span class="comment-count">0</span>
+</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- 06 PENDORA -->
+    <article
+      class="finalist-card interactive-finalist"
+      data-item-id="QIT-PENDORA"
+      data-item-type="QIT"
+      data-item-name="PENDORA"
+    >
+      <div class="finalist-image-wrap">
+        <img src="103.png" alt="Finalis QIT PENDORA" loading="lazy" />
+        <span class="finalist-gloss" aria-hidden="true"></span>
+
+        <span class="finalist-category">
+          <i class="fa-solid fa-trophy"></i>
+          QIT FINALIST
+        </span>
+      </div>
+
+      <div class="finalist-content">
+        <h3>PENDORA</h3>
+
+        <div class="finalist-engagement">
+          <button class="like-btn" type="button" data-like-button>
+  <i class="fa-regular fa-heart"></i>
+  <span class="engagement-label">Like</span>
+  <span class="like-count">0</span>
+</button>
+
+<button class="comment-btn" type="button" data-comment-button>
+  <i class="fa-regular fa-comment"></i>
+  <span class="engagement-label">Komentar</span>
+  <span class="comment-count">0</span>
+</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- 07 OPTIMAX PRIME -->
+    <article
+      class="finalist-card interactive-finalist"
+      data-item-id="QIT-OPTIMAX-PRIME"
+      data-item-type="QIT"
+      data-item-name="OPTIMAX PRIME"
+    >
+      <div class="finalist-image-wrap">
+        <img src="104.png" alt="Finalis QIT OPTIMAX PRIME" loading="lazy" />
+        <span class="finalist-gloss" aria-hidden="true"></span>
+
+        <span class="finalist-category">
+          <i class="fa-solid fa-trophy"></i>
+          QIT FINALIST
+        </span>
+      </div>
+
+      <div class="finalist-content">
+        <h3>OPTIMAX PRIME</h3>
+
+        <div class="finalist-engagement">
+<button class="like-btn" type="button" data-like-button>
+  <i class="fa-regular fa-heart"></i>
+  <span class="engagement-label">Like</span>
+  <span class="like-count">0</span>
+</button>
+
+<button class="comment-btn" type="button" data-comment-button>
+  <i class="fa-regular fa-comment"></i>
+  <span class="engagement-label">Komentar</span>
+  <span class="comment-count">0</span>
+</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- 08 INNOVIBE -->
+    <article
+      class="finalist-card interactive-finalist"
+      data-item-id="QIT-INNOVIBE"
+      data-item-type="QIT"
+      data-item-name="INNOVIBE"
+    >
+      <div class="finalist-image-wrap">
+        <img src="105.png" alt="Finalis QIT INNOVIBE" loading="lazy" />
+        <span class="finalist-gloss" aria-hidden="true"></span>
+
+        <span class="finalist-category">
+          <i class="fa-solid fa-trophy"></i>
+          QIT FINALIST
+        </span>
+      </div>
+
+      <div class="finalist-content">
+        <h3>INNOVIBE</h3>
+
+        <div class="finalist-engagement">
+          <button class="like-btn" type="button" data-like-button>
+  <i class="fa-regular fa-heart"></i>
+  <span class="engagement-label">Like</span>
+  <span class="like-count">0</span>
+</button>
+
+          <button class="comment-btn" type="button" data-comment-button>
+  <i class="fa-regular fa-comment"></i>
+  <span class="engagement-label">Komentar</span>
+  <span class="comment-count">0</span>
+</button>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+    <!-- =====================================================
+     GRAND FINALIST BEST SS — INTERACTIVE
+===================================================== -->
+<section class="section finalist-section" id="best-ss">
+  <div class="section-head">
+    <span class="section-badge">
+      <i class="fa-solid fa-award"></i>
+      BEST IMPROVEMENT
+    </span>
+
+    <h2>Grand Finalist Best Sumbang Saran</h2>
+
+    <p>
+      Berikan apresiasi untuk ide terbaik yang memberikan dampak nyata.
+      Geser ke kanan untuk melihat seluruh finalis.
+    </p>
+  </div>
+
+  <div class="finalist-rail">
+    <!-- BEST SS 01 -->
+    <article
+      class="finalist-card interactive-finalist"
+      data-item-id="SS-BEST-01"
+      data-item-type="SS"
+      data-item-name="BEST SS 01"
+    >
+      <div class="finalist-image-wrap">
+        <img src="106.png" alt="Best SS 01" loading="lazy" />
+        <span class="finalist-gloss" aria-hidden="true"></span>
+
+        <span class="finalist-category finalist-category-ss">
+          <i class="fa-solid fa-lightbulb"></i>
+          BEST SS
+        </span>
+      </div>
+
+      <div class="finalist-content">
+        <h3>-----</h3>
+
+        <div class="finalist-engagement">
+         <button class="like-btn" type="button" data-like-button>
+  <i class="fa-regular fa-heart"></i>
+  <span class="engagement-label">Like</span>
+  <span class="like-count">0</span>
+</button>
+
+<button class="comment-btn" type="button" data-comment-button>
+  <i class="fa-regular fa-comment"></i>
+  <span class="engagement-label">Komentar</span>
+  <span class="comment-count">0</span>
+</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- BEST SS 02 -->
+    <article
+      class="finalist-card interactive-finalist"
+      data-item-id="SS-BEST-02"
+      data-item-type="SS"
+      data-item-name="BEST SS 02"
+    >
+      <div class="finalist-image-wrap">
+        <img src="106.png" alt="Best SS 02" loading="lazy" />
+        <span class="finalist-gloss" aria-hidden="true"></span>
+
+        <span class="finalist-category finalist-category-ss">
+          <i class="fa-solid fa-lightbulb"></i>
+          BEST SS
+        </span>
+      </div>
+
+      <div class="finalist-content">
+        <h3>-----</h3>
+
+        <div class="finalist-engagement">
+          <button class="like-btn" type="button" data-like-button>
+  <i class="fa-regular fa-heart"></i>
+  <span class="engagement-label">Like</span>
+  <span class="like-count">0</span>
+</button>
+
+          <button class="comment-btn" type="button" data-comment-button>
+  <i class="fa-regular fa-comment"></i>
+  <span class="engagement-label">Komentar</span>
+  <span class="comment-count">0</span>
+</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- BEST SS 03 -->
+    <article
+      class="finalist-card interactive-finalist"
+      data-item-id="SS-BEST-03"
+      data-item-type="SS"
+      data-item-name="BEST SS 03"
+    >
+      <div class="finalist-image-wrap">
+        <img src="106.png" alt="Best SS 03" loading="lazy" />
+        <span class="finalist-gloss" aria-hidden="true"></span>
+
+        <span class="finalist-category finalist-category-ss">
+          <i class="fa-solid fa-lightbulb"></i>
+          BEST SS
+        </span>
+      </div>
+
+      <div class="finalist-content">
+        <h3>-----</h3>
+
+        <div class="finalist-engagement">
+          <button class="like-btn" type="button" data-like-button>
+  <i class="fa-regular fa-heart"></i>
+  <span class="engagement-label">Like</span>
+  <span class="like-count">0</span>
+</button>
+
+          <button class="comment-btn" type="button" data-comment-button>
+  <i class="fa-regular fa-comment"></i>
+  <span class="engagement-label">Komentar</span>
+  <span class="comment-count">0</span>
+</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- BEST SS 04 -->
+    <article
+      class="finalist-card interactive-finalist"
+      data-item-id="SS-BEST-04"
+      data-item-type="SS"
+      data-item-name="BEST SS 04"
+    >
+      <div class="finalist-image-wrap">
+        <img src="106.png" alt="Best SS 04" loading="lazy" />
+        <span class="finalist-gloss" aria-hidden="true"></span>
+
+        <span class="finalist-category finalist-category-ss">
+          <i class="fa-solid fa-lightbulb"></i>
+          BEST SS
+        </span>
+      </div>
+
+      <div class="finalist-content">
+        <h3>-----</h3>
+
+        <div class="finalist-engagement">
+<button class="like-btn" type="button" data-like-button>
+  <i class="fa-regular fa-heart"></i>
+  <span class="engagement-label">Like</span>
+  <span class="like-count">0</span>
+</button>
+
+          <button class="comment-btn" type="button" data-comment-button>
+  <i class="fa-regular fa-comment"></i>
+  <span class="engagement-label">Komentar</span>
+  <span class="comment-count">0</span>
+</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- BEST SS 05 -->
+    <article
+      class="finalist-card interactive-finalist"
+      data-item-id="SS-BEST-05"
+      data-item-type="SS"
+      data-item-name="BEST SS 05"
+    >
+      <div class="finalist-image-wrap">
+        <img src="106.png" alt="Best SS 05" loading="lazy" />
+        <span class="finalist-gloss" aria-hidden="true"></span>
+
+        <span class="finalist-category finalist-category-ss">
+          <i class="fa-solid fa-lightbulb"></i>
+          BEST SS
+        </span>
+      </div>
+
+      <div class="finalist-content">
+        <h3>-----</h3>
+
+        <div class="finalist-engagement">
+<button class="like-btn" type="button" data-like-button>
+  <i class="fa-regular fa-heart"></i>
+  <span class="engagement-label">Like</span>
+  <span class="like-count">0</span>
+</button>
+
+          <button class="comment-btn" type="button" data-comment-button>
+  <i class="fa-regular fa-comment"></i>
+  <span class="engagement-label">Komentar</span>
+  <span class="comment-count">0</span>
+</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- BEST SS 06 -->
+    <article
+      class="finalist-card interactive-finalist"
+      data-item-id="SS-BEST-06"
+      data-item-type="SS"
+      data-item-name="BEST SS 06"
+    >
+      <div class="finalist-image-wrap">
+        <img src="106.png" alt="Best SS 06" loading="lazy" />
+        <span class="finalist-gloss" aria-hidden="true"></span>
+
+        <span class="finalist-category finalist-category-ss">
+          <i class="fa-solid fa-lightbulb"></i>
+          BEST SS
+        </span>
+      </div>
+
+      <div class="finalist-content">
+        <h3>-----</h3>
+
+        <div class="finalist-engagement">
+<button class="like-btn" type="button" data-like-button>
+  <i class="fa-regular fa-heart"></i>
+  <span class="engagement-label">Like</span>
+  <span class="like-count">0</span>
+</button>
+
+          <button class="comment-btn" type="button" data-comment-button>
+  <i class="fa-regular fa-comment"></i>
+  <span class="engagement-label">Komentar</span>
+  <span class="comment-count">0</span>
+</button>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+  </main>
+
+  <!-- =====================================================
+     COMMENT MODAL — PIC 2026
+===================================================== -->
+<div class="comment-modal" id="commentModal" hidden>
+  <div
+    class="comment-modal-backdrop"
+    data-comment-close="true"
+  ></div>
+
+  <section
+    class="comment-modal-panel"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="commentModalTitle"
+  >
+    <button
+      class="comment-modal-close"
+      id="commentModalClose"
+      type="button"
+      aria-label="Tutup komentar"
+    >
+      &times;
+    </button>
+
+    <div class="comment-modal-head">
+      <span class="comment-modal-badge">
+        <i class="fa-regular fa-comments"></i>
+        SUPPORT YOUR FAVORITE
+      </span>
+
+      <h3 id="commentModalTitle">
+        Komentar Finalis
+      </h3>
+
+      <p id="commentModalSubtitle">
+        Berikan dukungan dan apresiasi terbaikmu.
+      </p>
+    </div>
+
+    <div class="comment-list" id="commentList">
+      <div class="comment-loading">
+        <i class="fa-solid fa-spinner fa-spin"></i>
+        <span>Memuat komentar...</span>
+      </div>
+    </div>
+
+    <form class="comment-form" id="commentForm">
+      <label for="commentInput">
+        Tulis komentar
+      </label>
+
+      <textarea
+        id="commentInput"
+        rows="3"
+        maxlength="300"
+        placeholder="Tulis apresiasi atau dukunganmu..."
+        required
+      ></textarea>
+
+      <div class="comment-form-footer">
+        <span
+          class="comment-char-count"
+          id="commentCharCount"
+        >
+          0/300
+        </span>
+
+        <button
+          class="comment-submit"
+          id="commentSubmit"
+          type="submit"
+        >
+          <i class="fa-solid fa-paper-plane"></i>
+          Kirim
+        </button>
+      </div>
+
+      <p
+        class="comment-status"
+        id="commentStatus"
+        aria-live="polite"
+      ></p>
+    </form>
+  </section>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

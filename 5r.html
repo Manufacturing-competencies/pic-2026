@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>QIT Day | PIC 2026</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body data-auth="required">
+  <!-- BACKGROUND MUSIC -->
+<audio id="bgMusic" loop preload="auto">
+  <source src="CHAMPIONS.mp3" type="audio/mpeg" />
+</audio>
+
+  <div class="bg-ribbon bg-ribbon-left" aria-hidden="true"></div>
+  <div class="bg-ribbon bg-ribbon-right" aria-hidden="true"></div>
+
+  <nav class="mini-nav">
+  <a href="index.html" class="brand-logo">
+    <img src="Logo1.jpg" alt="Paragon Innovation Challenge" />
+    <img src="Logo.jpg" alt="Paragon Corp" />
+  </a>
+
+  <div class="nav-menu">
+    <a href="index.html">
+      <i class="fa-solid fa-house"></i>
+      Home
+    </a>
+
+    <a href="#review-photo">
+      <i class="fa-solid fa-images"></i>
+      Gallery
+    </a>
+
+    <a href="#finalist-qit">
+      <i class="fa-solid fa-trophy"></i>
+      Finalis
+    </a>
+
+    <button
+  class="nav-btn music-nav-btn is-muted"
+  id="musicToggle"
+  type="button"
+  aria-label="Aktifkan musik"
+  title="Aktifkan musik"
+>
+  <i class="fa-solid fa-volume-xmark"></i>
+  <span class="music-nav-text">Music</span>
+</button>
+
+    <button class="nav-btn logout-btn" type="button" data-logout>
+      <i class="fa-solid fa-right-from-bracket"></i>
+      Logout
+    </button>
+  </div>
+</nav>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero hero-qit">
+      <div class="hero-glow"></div>
+
+      <div class="hero-inner">
+        <div class="hero-left">
+          <span class="hero-pill">
+            <i class="fa-solid fa-star"></i>
+            QIT DAY JOURNEY
+          </span>
+
+          <h1 class="hero-heading">
+            <span class="hero-highlight">2026</span><br />
+            QIT DAY
+          </h1>
+
+          <p class="hero-subtitle">
+            Present today. Impact tomorrow.<br />
+            Langkah awal menuju <span>Road to PIC 2026.</span>
+          </p>
+
+          <div class="hero-actions">
+            <a href="#review-photo" class="btn-primary">
+              <i class="fa-solid fa-camera-retro"></i>
+              Lihat Gallery
+            </a>
+
+            <a href="index.html" class="btn-secondary">
+              <i class="fa-solid fa-house"></i>
+              Back to Home
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="hero-illustration">
+            <img
+              src="MASKOD1.png"
+              alt="Ilustrasi QIT Day"
+              class="hero-img-main"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="photo-review-section" id="review-photo">
+      <div class="photo-review-wrap">
+        <div class="photo-review-head">
+          <span class="photo-review-badge">GALLERY</span>
+
+          <h2>Keseruan QIT Day Batch 8</h2>
+
+          <p>
+            Dokumentasi momen, cerita, dan keseruan perjalanan
+            QIT Day menuju PIC 2026.
+          </p>
+        </div>
+
+        <div class="photo-carousel">
+          <button
+            class="photo-nav photo-prev"
+            type="button"
+            aria-label="Foto sebelumnya"
+          >
+            &#10094;
+          </button>
+
+          <div class="photo-track-wrap">
+            <div
+              class="photo-track"
+              data-gallery-range
+              data-start="41"
+              data-end="97"
+              data-exclude="81,85,90"
+              data-label="QIT Day Batch 8"
+            ></div>
+          </div>
+
+          <button
+            class="photo-nav photo-next"
+            type="button"
+            aria-label="Foto berikutnya"
+          >
+            &#10095;
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINALIST QIT -->
+    <section class="qit-finalist-premium" id="finalist-qit">
+      <div class="qit-finalist-card-premium">
+        <div class="qit-finalist-head">
+          <span class="qit-finalist-badge">
+            <i class="fa-solid fa-trophy"></i>
+            QIT DAY BATCH 8
+          </span>
+
+          <h2>Daftar Finalis QIT Day</h2>
+
+          <p>
+            Tim-tim terbaik yang menghadirkan ide improvement
+            inspiratif dan berdampak nyata.
+          </p>
+
+          <div class="qit-finalist-tools">
+            <label class="qit-search-box">
+              <i class="fa-solid fa-magnifying-glass"></i>
+
+              <input
+                type="search"
+                id="qitSearchInput"
+                placeholder="Cari nama team..."
+                autocomplete="off"
+              />
+            </label>
+
+            <div class="qit-count-box">
+              <i class="fa-solid fa-users"></i>
+              <span id="qitTeamCount">0 Finalis</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="qit-team-cloud" id="qitTeamCloud"></div>
+
+        <p class="qit-empty-message" id="qitEmptyMessage">
+          Nama team tidak ditemukan.
+        </p>
+      </div>
+    </section>
+
+    <!-- DATA TEAM -->
+    <script type="application/json" id="qitTeamsData">
+      [
+        "STRIVEON",
+        "JETPUMP",
+        "EVERFORM",
+        "SMILE",
+        "TRANSPORMATION",
+        "ALPHA",
+        "SHINKA NO MICHI",
+        "TOY STORY",
+        "ALEXANDRIA",
+        "AKSATA",
+        "HIPLAST UNITED",
+        "KERIL",
+        "NEXT PACK",
+        "ENNOQI",
+        "THE ACTIVE AGENT",
+        "THE THINK TANK",
+        "GENG JUMBOOST",
+        "OPTIMAX PRIME",
+        "INFLUENCERS",
+        "ADMINOVA",
+        "WAROENG",
+        "CITO",
+        "AMINO RANGER",
+        "STAR WASH",
+        "AQUANOVA",
+        "THUMBELINA",
+        "GACOR",
+        "RI-PACK",
+        "OPTICORE",
+        "MANGROVE",
+        "SAKURA",
+        "GEN-Z",
+        "GROWTOPIA",
+        "QATALIS",
+        "SPOOKARA",
+        "R&DYNAMO",
+        "WARIOR",
+        "PENDAKI TANGGUH",
+        "UNLOCK",
+        "NAGA HITAM",
+        "THE CREM FUN",
+        "MEKATRIX",
+        "LIGHT+",
+        "CERIA",
+        "GENOVATE",
+        "SPEKTA",
+        "CONAN",
+        "PAKU BUMI",
+        "OKE",
+        "RX-78",
+        "SYNERA",
+        "POXSIS",
+        "FIX AND FURIOUS",
+        "SQUID MINDS",
+        "BAUT PATAH",
+        "ANGKASA",
+        "THE TRANSFORM",
+        "MUFASA",
+        "SAPHALA",
+        "PENDORA",
+        "D-LOW",
+        "MARIPOSA",
+        "ALSTAND",
+        "PRIME",
+        "ZENKA",
+        "WIB",
+        "MALEFICENT",
+        "COC",
+        "ENIGMA",
+        "KERAMAT",
+        "MICROVERSE",
+        "SATELITE",
+        "ZF3D",
+        "AI GEEKS",
+        "HACHI",
+        "SCOOBY GANG",
+        "FRO",
+        "5 GEN",
+        "INFINITY",
+        "DELAPAN",
+        "UMBREON",
+        "ZONASI",
+        "WAREVOLUTION",
+        "THE ORDER",
+        "BIMASAKTI",
+        "BANCET",
+        "WISANGGENI",
+        "TUJI",
+        "YOUTUBE",
+        "RADIO FM",
+        "DREAM CATCHER",
+        "GEMBA",
+        "CO NUCIFERA",
+        "PRESISI",
+        "PASIFIK",
+        "JAN_SAE",
+        "JURASSIX PLANT",
+        "RUNNER ZONE",
+        "DUSFORCE",
+        "ZILLENIAL",
+        "DYNAMIC",
+        "KALCER",
+        "MURDHA",
+        "NEXARA",
+        "VAMBITION"
+      ]
+    </script>
+
+    <!-- DOKUMENTASI -->
+    <section class="section" id="dokumentasi">
+      <div class="section-head">
+        <span class="section-badge">
+          <i class="fa-solid fa-chart-line"></i>
+          QIT DAY BATCH 8
+        </span>
+
+        <h2>Dokumentasi</h2>
+
+        <p>
+          Lihat keseruan QIT Day dan jadilah bagian dari perjalanan menuju PIC 2026.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fa-solid fa-images"></i>
+        </div>
+
+        <div class="feature-content">
+          <h3>Gallery QIT Day</h3>
+
+          <p>
+            Klik untuk melihat dokumentasi lengkap QIT Day Batch 8.
+          </p>
+        </div>
+
+        <a
+          class="feature-btn"
+          href="https://drive.google.com/drive/folders/1v2hLxBX2WBrO-0V1zEaVSfWZyoCzJMzV"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Click Here
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

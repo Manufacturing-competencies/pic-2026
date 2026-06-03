@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Login PIC 2026</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  />
+
+  <link rel="stylesheet" href="login.css" />
+</head>
+
+<body>
+  <!-- Musik hanya ditulis satu kali -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="CHAMPIONS.mp3" type="audio/mpeg" />
+  </audio>
+
+  <div class="login-particles" aria-hidden="true">
+    <span style="--i:1"></span>
+    <span style="--i:2"></span>
+    <span style="--i:3"></span>
+    <span style="--i:4"></span>
+    <span style="--i:5"></span>
+    <span style="--i:6"></span>
+    <span style="--i:7"></span>
+    <span style="--i:8"></span>
+    <span style="--i:9"></span>
+    <span style="--i:10"></span>
+    <span style="--i:11"></span>
+    <span style="--i:12"></span>
+  </div>
+
+  <div class="login-light-lines" aria-hidden="true"></div>
+
+  <main class="login-page">
+    <section class="login-card">
+      <div class="login-logo">
+        <img src="Logo1.jpg" alt="Paragon Innovation Challenge" />
+        <img src="Logo.jpg" alt="Paragon Corp" />
+      </div>
+
+      <div class="login-head">
+        <span class="login-badge">
+          <i class="fa-solid fa-lock"></i>
+          SECURE ACCESS
+        </span>
+
+        <h1>Login PIC 2026</h1>
+
+        <p>
+          Masuk menggunakan username atau email yang sudah terdaftar.
+        </p>
+      </div>
+
+      <form id="loginForm" class="login-form">
+        <label>
+          <span>Username / Email</span>
+
+          <div class="input-wrap">
+            <i class="fa-solid fa-user"></i>
+
+            <input
+              type="text"
+              id="username"
+              placeholder="Masukkan username atau email"
+              autocomplete="username"
+              required
+            />
+          </div>
+        </label>
+
+        <label>
+          <span>Password</span>
+
+          <div class="input-wrap password-wrap">
+            <i class="fa-solid fa-key"></i>
+
+            <input
+              type="password"
+              id="password"
+              placeholder="Masukkan password"
+              autocomplete="current-password"
+              required
+            />
+
+            <div class="password-action-pill">
+              <button
+                type="button"
+                class="music-inside is-muted"
+                id="musicToggle"
+                aria-label="Aktifkan musik"
+              >
+                <i class="fa-solid fa-volume-xmark"></i>
+              </button>
+
+              <button
+                type="button"
+                class="toggle-password"
+                id="togglePassword"
+                aria-label="Lihat password"
+              >
+                <i class="fa-solid fa-eye"></i>
+              </button>
+            </div>
+          </div>
+        </label>
+
+        <button type="submit" class="login-btn" id="loginBtn">
+          <i class="fa-solid fa-right-to-bracket"></i>
+          Masuk
+        </button>
+
+        <p class="login-message" id="loginMessage" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <script src="login.js"></script>
+</body>
+</html>

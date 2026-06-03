@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Pre Event | PIC 2026</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body data-auth="required">
+<!-- BACKGROUND MUSIC -->
+<audio id="bgMusic" loop preload="auto">
+  <source src="CHAMPIONS.mp3" type="audio/mpeg" />
+</audio>
+
+  <div class="bg-ribbon bg-ribbon-left" aria-hidden="true"></div>
+  <div class="bg-ribbon bg-ribbon-right" aria-hidden="true"></div>
+
+  <nav class="mini-nav">
+    <a href="index.html" class="brand-logo">
+      <img src="Logo1.jpg" alt="Paragon Innovation Challenge" />
+      <img src="Logo.jpg" alt="Paragon Corp" />
+    </a>
+
+    <div class="nav-menu">
+      <a href="index.html">
+        <i class="fa-solid fa-house"></i>
+        Home
+      </a>
+
+      <a href="#poster">
+        <i class="fa-solid fa-images"></i>
+        Poster
+      </a>
+
+     <button
+  class="nav-btn music-nav-btn is-muted"
+  id="musicToggle"
+  type="button"
+  aria-label="Aktifkan musik"
+  title="Aktifkan musik"
+>
+  <i class="fa-solid fa-volume-xmark"></i>
+  <span class="music-nav-text">Music</span>
+</button>
+
+      <button class="nav-btn logout-btn" type="button" data-logout>
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Logout
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero hero-pre">
+      <div class="hero-glow"></div>
+
+      <div class="hero-inner">
+        <div class="hero-left">
+          <span class="hero-pill">
+            <i class="fa-solid fa-bolt"></i>
+            PRE EVENT
+          </span>
+
+          <h1 class="hero-heading">
+            PRE EVENT<br />
+            <span class="hero-highlight">PIC 2026</span>
+          </h1>
+
+          <p class="hero-subtitle">
+            Prepare your best improvement.<br />
+            Your impact starts from <span>Pre Event PIC 2026.</span>
+          </p>
+
+          <div class="hero-actions">
+            <a href="#poster" class="btn-primary">
+              <i class="fa-solid fa-images"></i>
+              Lihat Poster
+            </a>
+
+            <a href="index.html" class="btn-secondary">
+              <i class="fa-solid fa-house"></i>
+              Back to Home
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="hero-illustration">
+            <img
+              src="MASKOD1.png"
+              alt="Pre Event PIC 2026"
+              class="hero-img-main"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- POSTER BOARD -->
+    <section class="section" id="poster">
+      <div class="section-head">
+        <span class="section-badge">
+          <i class="fa-solid fa-bullhorn"></i>
+          INFORMATION BOARD
+        </span>
+
+        <h2>Pre Event Information Board</h2>
+
+        <p>
+          Klik poster untuk melihat tampilan lebih besar dan membaca informasi detail.
+        </p>
+      </div>
+
+      <div class="poster-grid">
+        <!-- POSTER 1 -->
+        <article class="poster-card">
+          <button
+            class="poster-thumb"
+            type="button"
+            data-full="PICGOTTALENT.png"
+            data-title="PIC 2026: Got Talent"
+            data-link="https://docs.google.com/forms/d/e/1FAIpQLSeJRHOuGeyKd-TB1dif2UfeqmYUgMLg3BVkqrW8P-84pZn37A/viewform"
+          >
+            <img
+              src="PICGOTTALENT.png"
+              alt="PIC 2026 Got Talent"
+              loading="lazy"
+            />
+          </button>
+
+          <div class="poster-meta">
+            <h3>PIC 2026: Got Talent</h3>
+
+            <a
+              class="poster-link"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSeJRHOuGeyKd-TB1dif2UfeqmYUgMLg3BVkqrW8P-84pZn37A/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Buka Link
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+
+          <div class="poster-caption-template" hidden>
+            <p>
+              <strong>PIC 2026: GOT TALENT ✨</strong>
+            </p>
+
+            <p>
+              Bukan cuma ide yang bisa tampil di PIC 2026. Talenta kamu juga!
+            </p>
+
+            <p>
+              Punya skill menjadi MC, suka berbicara di depan audience,
+              atau memiliki kemampuan performance yang keren?
+            </p>
+
+            <ul>
+              <li>🎙️ 2 MC utama dan presentasi: 1 male & 1 female</li>
+              <li>🎙️ 2 MC ramah tamah: 1 male & 1 female</li>
+              <li>🎵 Music performer</li>
+            </ul>
+
+            <p><strong>Pendaftaran:</strong> 22 Mei–7 Juni 2026</p>
+            <p><strong>Pengumuman peserta terpilih:</strong> 8 Juni 2026</p>
+            <p><strong>CP MC:</strong> Tamim Asyhari — 0859 5971 4774</p>
+            <p><strong>CP Performer:</strong> Yoan Adinda — 0818 0612 5475</p>
+          </div>
+        </article>
+
+        <!-- POSTER 2 -->
+        <article class="poster-card">
+          <button
+            class="poster-thumb"
+            type="button"
+            data-full="LOMBAIK.png"
+            data-title="Lomba Video Instruksi Kerja"
+            data-link="https://docs.google.com/forms/d/e/1FAIpQLSch6xcgoHCjyx71HKspH3H-WpgwH86Q04emvpaFwGbY5_Z3mw/viewform"
+          >
+            <img
+              src="LOMBAIK.png"
+              alt="Lomba Video Instruksi Kerja"
+              loading="lazy"
+            />
+          </button>
+
+          <div class="poster-meta">
+            <h3>Lomba Video Instruksi Kerja</h3>
+
+            <a
+              class="poster-link"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSch6xcgoHCjyx71HKspH3H-WpgwH86Q04emvpaFwGbY5_Z3mw/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Buka Link
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+
+          <div class="poster-caption-template" hidden>
+            <p>
+              <strong>Lomba Video Instruksi Kerja 📹</strong>
+            </p>
+
+            <p>
+              Buat instruksi kerja menjadi lebih menarik, mudah dipahami,
+              konsisten, dan berdampak nyata untuk operasional.
+            </p>
+
+            <ul>
+              <li>✅ Mudah dipahami</li>
+              <li>✅ Konsisten</li>
+              <li>✅ Dapat menjadi standar resmi di seluruh area</li>
+            </ul>
+
+            <p>
+              Lomba terbuka untuk seluruh Paragonian aktif, baik perseorangan
+              maupun tim dengan maksimal lima anggota.
+            </p>
+
+            <p><strong>Periode submit:</strong> 2–28 Juni 2026</p>
+            <p><strong>Pengumuman pemenang:</strong> 6 Juli 2026</p>
+            <p><strong>CP:</strong> Anistuti — 0819 0656 7513</p>
+            <p><strong>CP:</strong> Silvy Veronica — 0878 7603 8814</p>
+          </div>
+        </article>
+
+        <!-- POSTER 3 -->
+        <article class="poster-card">
+          <button
+            class="poster-thumb"
+            type="button"
+            data-full="TICKETPHOTO.png"
+            data-title="Tiket Photobooth dan Videobooth Gratis"
+            data-link="https://ss.pti-cosmetics.com/sipp/web/index.php?r=site%2Flogin"
+          >
+            <img
+              src="TICKETPHOTO.png"
+              alt="Tiket Photobooth dan Videobooth PIC 2026"
+              loading="lazy"
+            />
+          </button>
+
+          <div class="poster-meta">
+            <h3>Tiket Photobooth PIC 2026</h3>
+
+            <a
+              class="poster-link"
+              href="https://ss.pti-cosmetics.com/sipp/web/index.php?r=site%2Flogin"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Buka Link
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+
+          <div class="poster-caption-template" hidden>
+            <p>
+              <strong>🎟️ Tiket Photobooth dan Videobooth PIC 2026 Gratis</strong>
+            </p>
+
+            <p>
+              Ide SS terbaikmu bisa membawamu lebih dekat ke pengalaman seru
+              di PIC 2026.
+            </p>
+
+            <ul>
+              <li>✅ Berlaku untuk seluruh kategori SS</li>
+              <li>✅ Submit SS pada periode 1–30 Juni 2026</li>
+              <li>✅ SS telah mendapatkan approval superior</li>
+              <li>✅ Cut off approval maksimal 3 Juli 2026</li>
+            </ul>
+
+            <p>
+              <strong>
+                Pengumuman penerima tiket akan diinformasikan pada 6 Juli 2026.
+              </strong>
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- POSTER MODAL -->
+  <div class="epic-poster-modal show-poster" id="posterModal" hidden>
+    <div class="epic-poster-backdrop" data-close="true"></div>
+
+    <div class="epic-poster-panel">
+      <button
+        class="epic-poster-close"
+        type="button"
+        id="posterModalClose"
+        aria-label="Tutup poster"
+      >
+        &times;
+      </button>
+
+      <div class="epic-poster-layout">
+        <div class="epic-poster-image-box">
+          <img id="posterModalImage" src="" alt="Poster Preview" />
+        </div>
+
+        <div class="epic-mobile-tabs">
+          <button
+            type="button"
+            class="epic-tab-btn active"
+            data-tab="poster"
+          >
+            <i class="fa-solid fa-image"></i>
+            Poster
+          </button>
+
+          <button
+            type="button"
+            class="epic-tab-btn"
+            data-tab="caption"
+          >
+            <i class="fa-solid fa-circle-info"></i>
+            Detail
+          </button>
+        </div>
+
+        <aside class="epic-poster-caption-box">
+          <span class="epic-poster-badge">
+            <i class="fa-solid fa-circle-info"></i>
+            DETAIL INFORMATION
+          </span>
+
+          <h3 id="posterModalTitle">Poster</h3>
+
+          <div
+            class="epic-poster-caption-scroll"
+            id="posterModalCaption"
+          ></div>
+
+          <a
+            href="#"
+            class="epic-poster-link"
+            id="posterModalLink"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Buka Link
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

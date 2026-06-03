@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Learning Zone – Kaizen & Improvement</title>
+
+  <!-- Fonts & Icons -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <!-- Global & Learning style -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style-Learning.css" />
+</head>
+<body>
+  <!-- ================= NAVBAR (SAMA DENGAN HALAMAN LAIN) ================= -->
+  <nav class="navbar mini-nav" role="navigation" aria-label="Navigasi utama">
+    <button
+      class="logo"
+      type="button"
+      onclick="window.location.href='index.html'"
+      aria-label="Kembali ke Dashboard"
+    >
+      <i class="fa-solid fa-house" aria-hidden="true"></i>
+      <span>Dashboard</span>
+    </button>
+
+
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+      type="button"
+      aria-label="Buka menu"
+      aria-controls="mainNav"
+      aria-expanded="false"
+    >
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+    </button>
+  </nav>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="learning-page">
+    <!-- ========== HERO ========== -->
+    <section class="hero-learning">
+      <!-- KIRI: TEKS -->
+      <div class="hero-learning-text">
+        <p class="tagline">Learning Zone</p>
+        <h1>Belajar Sambil <span>Berkarya</span></h1>
+        <p class="subtitle">
+          Karena bagi kami, bekerja adalah ruang belajar, dan belajar adalah
+          bagian dari bekerja. Yuk, upgrade diri lewat Kaizen, QIT, dan
+          berbagai program learning lainnya.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#learning-track" class="btn-primary">
+            <i class="fa-solid fa-play"></i> Mulai Learning
+          </a>
+          <a href="#internal-training" class="btn-ghost">
+            <i class="fa-solid fa-file-lines"></i> Lihat Dokumentasi
+          </a>
+        </div>
+      </div>
+
+      <!-- KANAN: VISUAL MENGAMBANG -->
+      <div class="hero-learning-visual">
+        <div class="bubble bubble-1"></div>
+        <div class="bubble bubble-2"></div>
+        <div class="bubble bubble-3"></div>
+
+        <div class="hero-card">
+          <p class="hero-card-title">Progress Minggu</p>
+          <p class="hero-card-number" id="weekNumber"></p>
+          <p class="hero-card-desc">Keep growing, Paragonian!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TRACK LEARNING ========== -->
+    <section id="learning-track" class="learning-track content">
+      <h2>Track Learning</h2>
+      <p class="section-subtitle">
+        Pilih jalur belajar sesuai kebutuhanmu.
+      </p>
+
+      <div class="track-grid">
+       <!-- CARD 1 -->
+<article
+  class="track-card"
+  onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSddawWKvxWwCy_oPs-3MMMD2VUMA6u3PjuUlgJUkUVu8fkP4A/viewform', '_blank')"
+>
+  <div class="track-icon">
+    <i class="fa-solid fa-lightbulb"></i>
+  </div>
+  <div class="track-body">
+    <h3>Link Form Request Training</h3>
+    <p>
+      Ajukan kebutuhan pembelajaran untuk mendukung peningkatan kompetensi di area kerja.
+    </p>
+    <span class="track-link">
+      👉 Akses Form Request Learning
+      <i class="fa-solid fa-arrow-right"></i>
+    </span>
+  </div>
+</article>
+
+      </div>
+    </section>
+
+    <!-- ========== INTERNAL TRAINING GALLERY (SCROLL KANAN-KIRI) ========== -->
+    <section id="internal-training" class="training-gallery content">
+      <h2>Dokumentasi Internal Training</h2>
+      <p class="section-subtitle">
+        Kumpulan dokumentasi training internal yang pernah dilakukan.
+      </p>
+
+      <div class="poster-grid">
+        <!-- Poster 1 – Accident Investigation -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/internal/accident-investigation?authuser=0"
+           target="_self"
+           style="background-image: url('AI.png');">
+          <span class="poster-title">Accident Investigation</span>
+        </a>
+
+        <!-- Poster 2 – Bahan Kimia Berbahaya -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/internal/bahan-kimia-berbahaya?authuser=0"
+           target="_self"
+           style="background-image: url('BKB.png');">
+          <span class="poster-title">Bahan Kimia Berbahaya</span>
+        </a>
+
+        <!-- Poster 3 – Basic Packaging -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/internal/basic-packaging?authuser=0"
+           target="_self"
+           style="background-image: url('PACK.png');">
+          <span class="poster-title">Basic Packaging</span>
+        </a>
+
+        <!-- Poster 4 – Basic Skill Cleaning Service -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/internal/basic-skill-cleaning-service?authuser=0"
+           target="_self"
+           style="background-image: url('CS.png');">
+          <span class="poster-title">Basic Skill Cleaning Service</span>
+        </a>
+
+        <!-- Poster 5 – Basic Machine -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/internal/basic-machine?authuser=0"
+           target="_self"
+           style="background-image: url('BM.png');">
+          <span class="poster-title">Basic Machine</span>
+        </a>
+
+        <!-- Poster 6 – Basic Skill Upstream Downstream -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/internal/basic-skill-upstream-downstream?authuser=0"
+           target="_self"
+           style="background-image: url('UPS.png');">
+          <span class="poster-title">Basic Skill Upstream Downstream</span>
+        </a>
+
+        <!-- Poster 7 – Check Weigher -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/internal/check-weigher?authuser=0"
+           target="_self"
+           style="background-image: url('CW.png');">
+          <span class="poster-title">Check Weigher</span>
+        </a>
+
+        <!-- Poster 8 – DAMKAR -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/internal/tanggap-darurat?authuser=0"
+           target="_self"
+           style="background-image: url('DAMKAR.png');">
+          <span class="poster-title">DAMKAR</span>
+        </a>
+
+        <!-- Poster 9 – Data Accuracy -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/internal/data-accuracy?authuser=0"
+           target="_self"
+           style="background-image: url('DATA.png');">
+          <span class="poster-title">Data Accuracy</span>
+        </a>
+
+        <!-- Poster 10 – Dokumen & Dokumentasi -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/internal/dokumen-dokumentasi?authuser=0"
+           target="_self"
+           style="background-image: url('DOKUMEN.png');">
+          <span class="poster-title">Dokumen &amp; Dokumentasi</span>
+        </a>
+
+        <!-- Poster 11 – Induction Officer Up New -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/internal/induction-officer-up-new?authuser=0"
+           target="_self"
+           style="background-image: url('OFFICER.png');">
+          <span class="poster-title">Induction Officer Up New</span>
+        </a>
+
+        <!-- Poster 12 – Lock Out Tag Out -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/internal/lock-out-tag-out?authuser=0"
+           target="_self"
+           style="background-image: url('LOTO.png');">
+          <span class="poster-title">Lock Out Tag Out</span>
+        </a>
+
+        <!-- Poster 13 – Malaysia Halal Standard -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/eksternal/training-malaysia-halal-standard?authuser=0"
+           target="_self"
+           style="background-image: url('MALAYSIA.png');">
+          <span class="poster-title">Malaysia Halal Standard</span>
+        </a>
+
+        <!-- Poster 14 – Mandatory / Safety -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/internal/mandatory?authuser=0"
+           target="_self"
+           style="background-image: url('MANDATORY.png');">
+          <span class="poster-title">Mandatory / Safety</span>
+        </a>
+
+        <!-- Poster 15 – MS Excel / Spreadsheet -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/internal/ms-excellspreadsheet?authuser=0"
+           target="_self"
+           style="background-image: url('EXCEL.png');">
+          <span class="poster-title">MS Excel / Spreadsheet</span>
+        </a>
+
+        <!-- Poster 16 – Negotiation Skill -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/internal/negotiation-skills?authuser=0"
+           target="_self"
+           style="background-image: url('NEGO.png');">
+          <span class="poster-title">Negotiation Skill</span>
+        </a>
+
+        <!-- Poster 17 – Risalah QIT -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/internal/risalah-qit?authuser=0"
+           target="_self"
+           style="background-image: url('QIT.png');">
+          <span class="poster-title">Risalah QIT</span>
+        </a>
+
+        <!-- Poster 18 – SMK-PK -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/internal/smk-pk?authuser=0"
+           target="_self"
+           style="background-image: url('SMK-PK.png');">
+          <span class="poster-title">SMK-PK</span>
+        </a>
+
+        <!-- Poster 19 – SPC -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/internal/statistical-process-control?authuser=0"
+           target="_self"
+           style="background-image: url('SPC.png');">
+          <span class="poster-title">Statistical Process Control</span>
+        </a>
+
+        <!-- Poster 20 – Training for Trainer -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/internal/training-for-trainer?authuser=0"
+           target="_self"
+           style="background-image: url('TRAINER.png');">
+          <span class="poster-title">Training for Trainer</span>
+        </a>
+
+        <!-- Poster 21 – Tukang Crem -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/internal/tukang-crem?authuser=0"
+           target="_self"
+           style="background-image: url('CREAM.png');">
+          <span class="poster-title">Tukang Crem</span>
+        </a>
+
+        <!-- Poster 22 – P3K -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/internal/p3k?authuser=0"
+           target="_self"
+           style="background-image: url('P3K.png');">
+          <span class="poster-title">P3K</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ========== EKSTERNAL TRAINING GALLERY (SCROLL KANAN-KIRI) ========== -->
+    <section id="external-training" class="training-gallery content">
+      <h2>Dokumentasi Eksternal Training</h2>
+      <p class="section-subtitle">
+        Kumpulan dokumentasi training eksternal yang pernah diikuti Paragonian.
+      </p>
+
+      <div class="poster-grid">
+        <!-- 1. AK3 Listrik -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/eksternal/sertifikasi-k3-listrik?authuser=0"
+           target="_self"
+           style="background-image: url('AK3.png');">
+          <span class="poster-title">AK3 Listrik</span>
+        </a>
+
+        <!-- 2. Basic PLC -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/eksternal/basic-plc?authuser=0"
+           target="_self"
+           style="background-image: url('PLC.png');">
+          <span class="poster-title">Basic PLC</span>
+        </a>
+
+        <!-- 3. Damkar -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/eksternal/sertifikasi-damkar?authuser=0"
+           target="_self"
+           style="background-image: url('DAMKAREKS.png');">
+          <span class="poster-title">Damkar</span>
+        </a>
+
+        <!-- 4. HACCP -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/eksternal/hazard-analysis-critical-control-point?authuser=0"
+           target="_self"
+           style="background-image: url('HACCP.png');">
+          <span class="poster-title">HACCP</span>
+        </a>
+
+        <!-- 5. Petugas K3 Kimia -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/eksternal/sertifikasi-k3-kimia?authuser=0"
+           target="_self"
+           style="background-image: url('K3KIMIA.png');">
+          <span class="poster-title">Petugas K3 Kimia</span>
+        </a>
+
+        <!-- 6. Operator K3 Lift -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/eksternal/operator-k3-lift?authuser=0"
+           target="_self"
+           style="background-image: url('K3LIFT.png');">
+          <span class="poster-title">Operator K3 Lift</span>
+        </a>
+
+        <!-- 7. Pesawat Tenaga Produksi -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/eksternal/sertifikasi-pesawat-tenaga-produksi?authuser=0"
+           target="_self"
+           style="background-image: url('PTP.png');">
+          <span class="poster-title">Pesawat Tenaga Produksi</span>
+        </a>
+
+        <!-- 8. Pest Awareness -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/eksternal/pest-awareness?authuser=0"
+           target="_self"
+           style="background-image: url('PEST.png');">
+          <span class="poster-title">Pest Awareness</span>
+        </a>
+
+        <!-- 9. SIO PAA -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/eksternal/sertifikasi-operator-pesawat-angkat-angkut?authuser=0"
+           target="_self"
+           style="background-image: url('PAA.png');">
+          <span class="poster-title">SIO PAA</span>
+        </a>
+
+        <!-- 10. SMK3 -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/eksternal/sistem-manajemen-k3?authuser=0"
+           target="_self"
+           style="background-image: url('SMK3.png');">
+          <span class="poster-title">SMK3</span>
+        </a>
+
+        <!-- 11. Bejana Tekan -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/eksternal/sertifikasi-k3-bejana-tekan?authuser=0"
+           target="_self"
+           style="background-image: url('TEKAN.png');">
+          <span class="poster-title">Teknisi K3 Bejana Tekan</span>
+        </a>
+
+        <!-- 12. Teknisi PAA -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/eksternal/teknisi-paa?authuser=0"
+           target="_self"
+           style="background-image: url('TEKNISI-PAA.png');">
+          <span class="poster-title">Teknisi PAA</span>
+        </a>
+
+        <!-- 13. Passenger Lift -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/eksternal/passenger-lift?authuser=0"
+           target="_self"
+           style="background-image: url('LIFT.png');">
+          <span class="poster-title">Passenger Lift</span>
+        </a>
+
+        <!-- 14. Auditor Internal SMT -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/eksternal/auditor-internal-smt?authuser=0"
+           target="_self"
+           style="background-image: url('SMT.png');">
+          <span class="poster-title">Auditor Internal SMT</span>
+        </a>
+
+        <!-- 15. Webinar / Malaysia Halal Standard -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/eksternal/training-malaysia-halal-standard?authuser=0"
+           target="_self"
+           style="background-image: url('MALAYSIA1.png');">
+          <span class="poster-title">Malaysia Halal Standard</span>
+        </a>
+
+        <!-- 16. ISO 22716 -->
+        <a class="poster-card"
+           href="https://sites.google.com/view/dokumentasitraining/eksternal/training-iso-22716?authuser=0"
+           target="_self"
+           style="background-image: url('ISO.png');">
+          <span class="poster-title">ISO 22716</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= JS: AUTO WEEK NUMBER ================= -->
+  <script>
+    function getWeekNumber(date) {
+      const onejan = new Date(date.getFullYear(), 0, 1);
+      const millisecsInDay = 86400000;
+      return Math.ceil(((date - onejan) / millisecsInDay + onejan.getDay() + 1) / 7);
+    }
+
+    const today = new Date();
+    const week = getWeekNumber(today);
+    const weekEl = document.getElementById("weekNumber");
+    if (weekEl) weekEl.textContent = "W" + week;
+  </script>
+</body>
+</html>
