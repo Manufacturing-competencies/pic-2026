@@ -8,10 +8,12 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
     rel="stylesheet"
   />
+
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -21,14 +23,23 @@
 </head>
 
 <body data-auth="required">
-<!-- BACKGROUND MUSIC -->
-<audio id="bgMusic" loop preload="auto">
-  <source src="CHAMPIONS.mp3" type="audio/mpeg" />
-</audio>
 
+  <!-- =====================================================
+       BACKGROUND MUSIC
+  ====================================================== -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="CHAMPIONS.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- =====================================================
+       BACKGROUND DECORATION
+  ====================================================== -->
   <div class="bg-ribbon bg-ribbon-left" aria-hidden="true"></div>
   <div class="bg-ribbon bg-ribbon-right" aria-hidden="true"></div>
 
+  <!-- =====================================================
+       NAVBAR
+  ====================================================== -->
   <nav class="mini-nav">
     <a href="index.html" class="brand-logo">
       <img src="Logo1.jpg" alt="Paragon Innovation Challenge" />
@@ -46,16 +57,16 @@
         Pre Event
       </a>
 
-     <button
-  class="nav-btn music-nav-btn is-muted"
-  id="musicToggle"
-  type="button"
-  aria-label="Aktifkan musik"
-  title="Aktifkan musik"
->
-  <i class="fa-solid fa-volume-xmark"></i>
-  <span class="music-nav-text">Music</span>
-</button>
+      <button
+        class="nav-btn music-nav-btn is-muted"
+        id="musicToggle"
+        type="button"
+        aria-label="Aktifkan musik"
+        title="Aktifkan musik"
+      >
+        <i class="fa-solid fa-volume-xmark"></i>
+        <span class="music-nav-text">Music</span>
+      </button>
 
       <button class="nav-btn logout-btn" type="button" data-logout>
         <i class="fa-solid fa-right-from-bracket"></i>
@@ -64,8 +75,14 @@
     </div>
   </nav>
 
+  <!-- =====================================================
+       MAIN CONTENT
+  ====================================================== -->
   <main>
-    <!-- HERO -->
+
+    <!-- ===================================================
+         HERO
+    ==================================================== -->
     <section class="hero hero-pre">
       <div class="hero-glow"></div>
 
@@ -111,7 +128,9 @@
       </div>
     </section>
 
-    <!-- POSTER BOARD -->
+    <!-- ===================================================
+         PRE EVENT INFORMATION BOARD
+    ==================================================== -->
     <section class="section" id="poster">
       <div class="section-head">
         <span class="section-badge">
@@ -127,7 +146,10 @@
       </div>
 
       <div class="poster-grid">
-        <!-- POSTER 1 -->
+
+        <!-- ===============================================
+             POSTER 1 — PIC 2026 GOT TALENT
+        ================================================ -->
         <article class="poster-card">
           <button
             class="poster-thumb"
@@ -172,8 +194,8 @@
             </p>
 
             <ul>
-              <li>🎙️ 2 MC utama dan presentasi: 1 male & 1 female</li>
-              <li>🎙️ 2 MC ramah tamah: 1 male & 1 female</li>
+              <li>🎙️ 2 MC utama dan presentasi: 1 male &amp; 1 female</li>
+              <li>🎙️ 2 MC ramah tamah: 1 male &amp; 1 female</li>
               <li>🎵 Music performer</li>
             </ul>
 
@@ -184,7 +206,9 @@
           </div>
         </article>
 
-        <!-- POSTER 2 -->
+        <!-- ===============================================
+             POSTER 2 — LOMBA VIDEO INSTRUKSI KERJA
+        ================================================ -->
         <article class="poster-card">
           <button
             class="poster-thumb"
@@ -242,7 +266,9 @@
           </div>
         </article>
 
-        <!-- POSTER 3 -->
+        <!-- ===============================================
+             POSTER 3 — TIKET PHOTOBOOTH
+        ================================================ -->
         <article class="poster-card">
           <button
             class="poster-thumb"
@@ -296,11 +322,112 @@
             </p>
           </div>
         </article>
+
       </div>
     </section>
+
+    <!-- ===================================================
+         PENGUMUMAN PEMENANG DAN REWARD
+         ID dibedakan agar tidak bentrok dengan section poster.
+    ==================================================== -->
+    <section class="section" id="reward">
+      <div class="section-head">
+        <span class="section-badge">
+          <i class="fa-solid fa-gift"></i>
+          REWARD INFORMATION
+        </span>
+
+        <h2>Pengumuman Pemenang dan<br>Reward Pre Event</h2>
+
+        <p>
+          Klik untuk melihat tampilan lebih besar dan membaca informasi detail
+        </p>
+      </div>
+
+      <div class="poster-grid">
+
+        <!-- ===============================================
+             POSTER 4 — IMPLEMENTASI SS 30 HARI
+        ================================================ -->
+        <article class="poster-card">
+          <button
+            class="poster-thumb"
+            type="button"
+            data-full="IMPLEMENTASI30HARI.png"
+            data-title="Challenge Implementasi SS 30 Hari"
+            data-link="https://drive.google.com/file/d/1fTHLt-bm7bv7sqUY6iTnoqyuUKauOowN/view?usp=sharing"
+          >
+            <img
+              src="IMPLEMENTASI30HARI.png"
+              alt="Challenge Implementasi SS 30 Hari"
+              loading="lazy"
+            />
+          </button>
+
+          <div class="poster-meta">
+            <h3>Pemenang Special Gift Challenge Implementasi SS 30 Hari</h3>
+
+            <a
+              class="poster-link"
+              href="https://drive.google.com/file/d/1fTHLt-bm7bv7sqUY6iTnoqyuUKauOowN/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Buka Link
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+
+          <div class="poster-caption-template" hidden>
+            <p>
+              <strong>
+                Pemenang Special Gift Challenge Implementasi SS 30 Hari ✨
+              </strong>
+            </p>
+
+            <p>
+              Setelah dilakukan verifikasi dan penarikan data sesuai periode
+              cut-off 30 Mei 2026, berikut daftar peserta yang berhak mendapatkan
+              Special Gift Challenge Implementasi 30 Hari Sumbang Saran untuk
+              periode submit bulan Februari–Mei 2026. 🎁
+            </p>
+
+            <p>
+              <strong>Detail Informasi Pengambilan Hadiah:</strong>
+            </p>
+
+            <ul>
+              <li>📅 Pengambilan hadiah: 11 Juli 2026</li>
+              <li>⏰ Pukul: 09.00–11.00 WIB</li>
+              <li>📍 Tempat: Area Registrasi Aula Jatake 6</li>
+            </ul>
+
+            <p>
+              Belum sempat melakukan implementasi? Tenang, masih ada kesempatan! ✨
+            </p>
+
+            <p>
+              Segera selesaikan implementasi dan submit SS periode Februari–Mei
+              2026 paling lambat 30 Juni 2026 untuk mengikuti Periode 2.
+            </p>
+
+            <p>
+              Jangan sampai terlewat! 🚀 Informasi lebih lanjut akan disampaikan
+              menyusul.
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
   </main>
 
-  <!-- POSTER MODAL -->
+  <!-- =====================================================
+       POSTER MODAL
+       Hanya ditulis satu kali agar semua poster memakai modal
+       yang sama dan JavaScript tidak mengalami konflik ID.
+  ====================================================== -->
   <div class="epic-poster-modal show-poster" id="posterModal" hidden>
     <div class="epic-poster-backdrop" data-close="true"></div>
 
@@ -367,6 +494,9 @@
     </div>
   </div>
 
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
   <script src="script.js"></script>
 </body>
 </html>

@@ -3907,3 +3907,385 @@ button{
     transform:scale(1.06);
   }
 }
+
+/* =========================================================
+   PRE EVENT — FINAL ADDITIONAL FIX
+   Tempelkan paling bawah file style.css
+   Tidak perlu menghapus CSS sebelumnya
+========================================================= */
+
+/* Posisi scroll section tidak tertutup sticky navbar */
+#poster,
+#reward{
+  scroll-margin-top:92px;
+}
+
+/* Beri jarak yang konsisten antar information board */
+#reward{
+  margin-top:30px;
+  margin-bottom:50px;
+}
+
+/* Tampilan poster tetap rapi jika jumlah poster hanya satu */
+#reward .poster-grid{
+  justify-content:flex-start;
+}
+
+/* Section reward memiliki aksen ringan tanpa mengubah tema utama */
+#reward .section-badge{
+  color:var(--blue);
+}
+
+/* Judul panjang tidak keluar dari card */
+.poster-meta h3{
+  overflow-wrap:anywhere;
+}
+
+/* Menyamakan tinggi bagian metadata poster */
+.poster-meta{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  min-height:122px;
+}
+
+/* Tombol selalu berada pada bagian bawah card */
+.poster-meta .poster-link{
+  margin-top:auto;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media(max-width:980px){
+  #poster,
+  #reward{
+    scroll-margin-top:145px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:640px){
+  #poster,
+  #reward{
+    scroll-margin-top:150px;
+  }
+
+  #reward{
+    margin-top:24px;
+    margin-bottom:34px;
+  }
+
+  .poster-meta{
+    min-height:116px;
+  }
+}
+
+/* =========================================================
+   GLOWSY POSTER EFFECT
+   Tempelkan paling bawah style.css
+========================================================= */
+
+/* Card poster dibuat lebih glowing */
+.poster-card{
+  position:relative;
+  overflow:hidden;
+  border-radius:24px;
+  background:rgba(255,255,255,.92);
+  box-shadow:
+    0 18px 40px rgba(37,99,235,.14),
+    0 0 0 1px rgba(255,255,255,.7);
+  transition:
+    transform .35s ease,
+    box-shadow .35s ease,
+    filter .35s ease;
+}
+
+/* Aura glow di belakang card */
+.poster-card::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  z-index:0;
+  border-radius:26px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(56,189,248,.35),
+      rgba(37,99,235,.25),
+      rgba(255,95,143,.25),
+      rgba(255,216,107,.22)
+    );
+  filter:blur(18px);
+  opacity:.65;
+  transition:opacity .35s ease, filter .35s ease;
+}
+
+/* Layer glossy di atas card */
+.poster-card::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-120%;
+  width:70%;
+  height:100%;
+  z-index:2;
+  pointer-events:none;
+  background:linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255,255,255,.06) 25%,
+    rgba(255,255,255,.45) 50%,
+    rgba(255,255,255,.08) 75%,
+    transparent 100%
+  );
+  transform:skewX(-22deg);
+}
+
+/* Hover lebih hidup */
+.poster-card:hover{
+  transform:translateY(-8px) scale(1.01);
+  box-shadow:
+    0 28px 65px rgba(37,99,235,.22),
+    0 10px 26px rgba(255,95,143,.14),
+    0 0 24px rgba(56,189,248,.18);
+}
+
+.poster-card:hover::before{
+  opacity:.95;
+  filter:blur(24px);
+}
+
+.poster-card:hover::after{
+  animation:posterShine 1.15s ease;
+}
+
+/* Area gambar poster */
+.poster-thumb{
+  position:relative;
+  z-index:1;
+  overflow:hidden;
+  border-radius:20px 20px 0 0;
+  background:linear-gradient(135deg, rgba(255,255,255,.8), rgba(230,245,255,.8));
+}
+
+/* Gambar poster dibuat lebih rich */
+.poster-thumb img{
+  width:100%;
+  display:block;
+  transform:scale(1);
+  transition:transform .35s ease, filter .35s ease;
+  filter:saturate(1.06) contrast(1.04) brightness(1.01);
+}
+
+/* Glass highlight di gambar */
+.poster-thumb::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.28) 0%,
+      rgba(255,255,255,.08) 18%,
+      rgba(255,255,255,0) 42%
+    );
+}
+
+/* Efek kilap diagonal */
+.poster-thumb::after{
+  content:"";
+  position:absolute;
+  top:-20%;
+  left:-130%;
+  width:60%;
+  height:140%;
+  z-index:3;
+  pointer-events:none;
+  background:linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255,255,255,.12) 25%,
+    rgba(255,255,255,.55) 50%,
+    rgba(255,255,255,.10) 75%,
+    transparent 100%
+  );
+  transform:skewX(-20deg);
+}
+
+.poster-card:hover .poster-thumb::after{
+  animation:posterGloss 1.2s ease;
+}
+
+.poster-card:hover .poster-thumb img{
+  transform:scale(1.04);
+  filter:saturate(1.1) contrast(1.06) brightness(1.03);
+}
+
+/* Meta dibuat lebih clean dan soft */
+.poster-meta{
+  position:relative;
+  z-index:1;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.95),
+      rgba(246,250,255,.98)
+    );
+}
+
+/* Judul lebih firm */
+.poster-meta h3{
+  color:var(--text);
+  text-shadow:0 1px 0 rgba(255,255,255,.55);
+}
+
+/* Tombol link lebih glowing */
+.poster-link{
+  position:relative;
+  overflow:hidden;
+  box-shadow:
+    0 10px 22px rgba(37,99,235,.22),
+    0 0 14px rgba(56,189,248,.16);
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    filter .25s ease;
+}
+
+.poster-link::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-120%;
+  width:60%;
+  height:100%;
+  background:linear-gradient(
+    115deg,
+    transparent,
+    rgba(255,255,255,.45),
+    transparent
+  );
+  transform:skewX(-22deg);
+}
+
+.poster-link:hover{
+  transform:translateY(-2px);
+  box-shadow:
+    0 15px 28px rgba(37,99,235,.28),
+    0 0 18px rgba(255,95,143,.18);
+  filter:brightness(1.03);
+}
+
+.poster-link:hover::before{
+  animation:btnGloss 1s ease;
+}
+
+/* Preview modal gambar dibuat lebih glowing */
+.epic-poster-image-box{
+  position:relative;
+  overflow:hidden;
+  border-radius:24px;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.85), rgba(237,248,255,.9));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.75),
+    0 18px 44px rgba(37,99,235,.14),
+    0 0 18px rgba(56,189,248,.10);
+}
+
+.epic-poster-image-box::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.20),
+      transparent 30%
+    );
+}
+
+.epic-poster-image-box::after{
+  content:"";
+  position:absolute;
+  top:-10%;
+  left:-130%;
+  width:55%;
+  height:130%;
+  pointer-events:none;
+  background:linear-gradient(
+    115deg,
+    transparent,
+    rgba(255,255,255,.45),
+    transparent
+  );
+  transform:skewX(-22deg);
+  animation:modalGloss 4.6s ease-in-out infinite;
+}
+
+/* Panel modal ikut soft glow */
+.epic-poster-panel{
+  box-shadow:
+    0 26px 70px rgba(15,23,42,.24),
+    0 0 28px rgba(56,189,248,.10);
+}
+
+/* Animasi */
+@keyframes posterGloss{
+  0%{
+    left:-130%;
+  }
+  100%{
+    left:140%;
+  }
+}
+
+@keyframes posterShine{
+  0%{
+    left:-120%;
+  }
+  100%{
+    left:150%;
+  }
+}
+
+@keyframes btnGloss{
+  0%{
+    left:-120%;
+  }
+  100%{
+    left:150%;
+  }
+}
+
+@keyframes modalGloss{
+  0%, 70%{
+    left:-130%;
+  }
+  100%{
+    left:140%;
+  }
+}
+
+/* Mobile tetap aman */
+@media(max-width:640px){
+  .poster-card:hover{
+    transform:translateY(-4px) scale(1.005);
+  }
+
+  .poster-card::before{
+    filter:blur(14px);
+  }
+
+  .epic-poster-image-box{
+    border-radius:18px;
+  }
+}
