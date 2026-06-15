@@ -53,6 +53,13 @@ function enforceAuth() {
 function clearPicSession() {
   sessionStorage.removeItem("picUser");
   sessionStorage.removeItem("picSessionToken");
+
+  /*
+    Supaya setelah logout dan login ulang,
+    popup info muncul kembali.
+  */
+  sessionStorage.removeItem("picInfoSeen");
+  sessionStorage.removeItem("picShowInfoAfterLogin");
 }
 
 /* =====================================================
