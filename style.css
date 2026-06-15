@@ -4289,3 +4289,327 @@ button{
     border-radius:18px;
   }
 }
+
+/* =========================================================
+   POPUP GLOSSY ONLY
+   Background belakang tetap sama
+   Tempelkan paling bawah style.css
+========================================================= */
+
+/* =========================================
+   BACKDROP / BELAKANG
+   Dibiarin tetap seperti style lama
+========================================= */
+.info-backdrop,
+.epic-poster-backdrop{
+  background: rgba(15,23,42,.34) !important;
+  backdrop-filter: blur(5px) !important;
+  -webkit-backdrop-filter: blur(5px) !important;
+}
+
+/* =========================================
+   WRAPPER POPUP INFO
+========================================= */
+.info-popup-inner{
+  position: relative !important;
+  z-index: 2 !important;
+  animation: popupSoftEnter .4s ease both;
+}
+
+/* =========================================
+   SLIDER INFO
+   Tetap bisa digeser kanan kiri
+========================================= */
+.info-slider{
+  position: relative !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  display: flex !important;
+  scroll-snap-type: x mandatory !important;
+  scroll-behavior: smooth !important;
+  touch-action: pan-x pinch-zoom !important;
+  -webkit-overflow-scrolling: touch !important;
+  border-radius: 26px !important;
+
+  border: 1px solid rgba(255,255,255,.78) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,.18),
+    rgba(255,255,255,.05)
+  ) !important;
+
+  box-shadow:
+    0 24px 60px rgba(15,23,42,.26),
+    0 0 24px rgba(56,189,248,.15),
+    inset 0 1px 0 rgba(255,255,255,.82) !important;
+
+  cursor: grab;
+}
+
+.info-slider:active{
+  cursor: grabbing;
+}
+
+.info-slider::-webkit-scrollbar{
+  display: none !important;
+}
+
+.info-slide{
+  position: relative !important;
+  flex: 0 0 100% !important;
+  min-width: 100% !important;
+  width: 100% !important;
+  scroll-snap-align: center !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+/* Shine di atas popup tapi tidak mengganggu swipe */
+.info-slide::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    transparent 38%,
+    rgba(255,255,255,.12) 45%,
+    rgba(255,255,255,.48) 50%,
+    rgba(255,255,255,.12) 56%,
+    transparent 64%,
+    transparent 100%
+  );
+  transform: translateX(-130%);
+  animation: popupShineMove 3.6s ease-in-out infinite;
+}
+
+.info-slide img{
+  position: relative;
+  z-index: 2;
+  border-radius: 24px !important;
+  border: 1px solid rgba(255,255,255,.88) !important;
+
+  box-shadow:
+    0 18px 40px rgba(15,23,42,.24),
+    0 0 20px rgba(56,189,248,.18),
+    0 0 34px rgba(255,95,143,.10) !important;
+}
+
+/* =========================================
+   DOTS
+========================================= */
+.info-dots{
+  margin-top: 14px !important;
+}
+
+.info-dot{
+  background: rgba(255,255,255,.88) !important;
+  box-shadow: 0 4px 12px rgba(15,23,42,.14) !important;
+}
+
+.info-dot.active{
+  background: linear-gradient(135deg, #2563eb, #38bdf8) !important;
+  box-shadow:
+    0 4px 14px rgba(37,99,235,.24),
+    0 0 12px rgba(56,189,248,.30) !important;
+}
+
+/* =========================================
+   CLOSE BUTTON
+========================================= */
+.info-close,
+.epic-poster-close{
+  background: linear-gradient(135deg, #2563eb, #38bdf8, #ff5f8f) !important;
+  box-shadow:
+    0 14px 30px rgba(15,23,42,.22),
+    0 0 18px rgba(56,189,248,.25),
+    0 0 0 4px rgba(255,255,255,.16) !important;
+}
+
+/* =========================================
+   PRE EVENT POSTER MODAL
+========================================= */
+.epic-poster-panel{
+  position: relative !important;
+  overflow: hidden !important;
+
+  border: 1px solid rgba(255,255,255,.82) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,.98),
+    rgba(236,248,255,.95)
+  ) !important;
+
+  box-shadow:
+    0 28px 70px rgba(15,23,42,.28),
+    0 0 24px rgba(56,189,248,.16),
+    inset 0 1px 0 rgba(255,255,255,.9) !important;
+
+  animation: popupSoftEnter .4s ease both;
+}
+
+.epic-poster-panel::before{
+  content: "";
+  position: absolute;
+  inset: -40%;
+  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    transparent 40%,
+    rgba(255,255,255,.10) 46%,
+    rgba(255,255,255,.55) 50%,
+    rgba(255,255,255,.12) 55%,
+    transparent 63%,
+    transparent 100%
+  );
+  transform: translateX(-130%) rotate(10deg);
+  animation: popupShineMove 4s ease-in-out infinite;
+}
+
+.epic-poster-layout,
+.epic-poster-close{
+  position: relative;
+  z-index: 2;
+}
+
+.epic-poster-image-box{
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 22px !important;
+  background: rgba(255,255,255,.7) !important;
+  box-shadow:
+    0 16px 36px rgba(37,99,235,.10),
+    inset 0 1px 0 rgba(255,255,255,.82) !important;
+}
+
+.epic-poster-image-box::after{
+  content: "";
+  position: absolute;
+  inset: -40%;
+  pointer-events: none;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    transparent 40%,
+    rgba(255,255,255,.12) 47%,
+    rgba(255,255,255,.5) 50%,
+    rgba(255,255,255,.12) 54%,
+    transparent 62%,
+    transparent 100%
+  );
+  transform: translateX(-130%) rotate(10deg);
+  animation: popupShineMove 3.7s ease-in-out infinite;
+}
+
+.epic-poster-image-box img{
+  border-radius: 18px !important;
+  box-shadow:
+    0 16px 34px rgba(15,23,42,.18),
+    0 0 18px rgba(56,189,248,.12) !important;
+}
+
+.epic-poster-caption-box{
+  background: rgba(255,255,255,.84) !important;
+  border: 1px solid rgba(255,255,255,.8) !important;
+  box-shadow:
+    0 14px 30px rgba(37,99,235,.08),
+    inset 0 1px 0 rgba(255,255,255,.85) !important;
+}
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+@keyframes popupSoftEnter{
+  from{
+    opacity: 0;
+    transform: translateY(16px) scale(.97);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes popupShineMove{
+  0%{
+    transform: translateX(-130%) rotate(10deg);
+    opacity: 0;
+  }
+  15%{
+    opacity: .9;
+  }
+  55%,
+  100%{
+    transform: translateX(130%) rotate(10deg);
+    opacity: 0;
+  }
+}
+
+/* HP */
+@media(max-width:640px){
+  .info-slide::before,
+  .epic-poster-panel::before,
+  .epic-poster-image-box::after{
+    animation-duration: 5s;
+    opacity: .8;
+  }
+}
+
+/* Hilangkan / transparankan garis putih popup info */
+.info-slider{
+  border: 1px solid transparent !important;
+  box-shadow:
+    0 24px 60px rgba(15,23,42,.26),
+    0 0 24px rgba(56,189,248,.15) !important;
+}
+
+/* Kalau masih ada garis di gambar posternya, ikut transparankan */
+.info-slide img{
+  border: 1px solid transparent !important;
+}
+
+/* =========================================================
+   POPUP VIDEO AUTOPLAY STYLE
+========================================================= */
+
+.info-video-slide{
+  flex: 0 0 100% !important;
+  min-width: 100% !important;
+  width: 100% !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  scroll-snap-align: center !important;
+}
+
+.info-video{
+  width: auto !important;
+  max-width: min(720px, 88vw) !important;
+  max-height: calc(100dvh - 120px) !important;
+
+  display: block;
+
+  border-radius: 24px !important;
+  border: 1px solid transparent !important;
+  background: #000;
+
+  box-shadow:
+    0 18px 40px rgba(15,23,42,.24),
+    0 0 20px rgba(56,189,248,.18),
+    0 0 34px rgba(255,95,143,.10) !important;
+}
+
+@media(max-width:640px){
+  .info-video{
+    max-width: min(350px, 88vw) !important;
+    max-height: calc(100dvh - 105px) !important;
+    border-radius: 20px !important;
+  }
+}

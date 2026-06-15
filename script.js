@@ -11,10 +11,6 @@ const PIC_API_URL =
   "https://script.google.com/macros/s/AKfycbxukqZ8McVtb8C8GSJpx2E-LAC49XS-DRMRd4DTStycrskzfdRUv9yEZshz9fb4rxI/exec";
 
 document.addEventListener("DOMContentLoaded", () => {
-  /*
-    Seluruh fitur hanya dijalankan setelah
-    autentikasi dinyatakan valid.
-  */
   if (!enforceAuth()) return;
 
   buildGeneratedGalleries();
@@ -37,10 +33,6 @@ function enforceAuth() {
   const requiresAuth =
     document.body.dataset.auth === "required";
 
-  /*
-    Aman digunakan jika suatu saat terdapat halaman
-    yang tidak memerlukan login.
-  */
   if (!requiresAuth) return true;
 
   const currentUser =
@@ -49,16 +41,9 @@ function enforceAuth() {
   const sessionToken =
     sessionStorage.getItem("picSessionToken");
 
-  /*
-    User dan token wajib tersedia.
-  */
   if (!currentUser || !sessionToken) {
     clearPicSession();
-
-    window.location.replace(
-      "login.html"
-    );
-
+    window.location.replace("login.html");
     return false;
   }
 
@@ -78,50 +63,34 @@ function initLogout() {
   document
     .querySelectorAll("[data-logout]")
     .forEach((button) => {
-      button.addEventListener(
-        "click",
-        async () => {
-          if (button.disabled) return;
+      button.addEventListener("click", async () => {
+        if (button.disabled) return;
 
-          button.disabled = true;
+        button.disabled = true;
 
-          const sessionToken =
-            sessionStorage.getItem(
-              "picSessionToken"
-            );
+        const sessionToken =
+          sessionStorage.getItem("picSessionToken");
 
-          try {
-            /*
-              Logout tetap dikirim ke server agar token
-              sesi dibersihkan dari database.
-            */
-            if (sessionToken) {
-              await picApiPost(
-                {
-                  action: "logout",
-                  sessionToken
-                },
-                false
-              );
-            }
-          } catch (error) {
-            /*
-              Jika server gagal merespons, user tetap
-              dapat logout dari browser.
-            */
-            console.warn(
-              "Logout server tidak dapat diproses:",
-              error
-            );
-          } finally {
-            clearPicSession();
-
-            window.location.replace(
-              "login.html"
+        try {
+          if (sessionToken) {
+            await picApiPost(
+              {
+                action: "logout",
+                sessionToken
+              },
+              false
             );
           }
+        } catch (error) {
+          console.warn(
+            "Logout server tidak dapat diproses:",
+            error
+          );
+        } finally {
+          clearPicSession();
+          window.location.replace("login.html");
         }
-      );
+      });
     });
 }
 
@@ -142,31 +111,21 @@ function buildGeneratedGalleries() {
       const excludes =
         String(track.dataset.exclude || "")
           .split(",")
-          .map((item) =>
-            Number(item.trim())
-          )
+          .map((item) => Number(item.trim()))
           .filter(Boolean);
 
       const label =
-        track.dataset.label ||
-        "Dokumentasi PIC 2026";
+        track.dataset.label || "Dokumentasi PIC 2026";
 
       track.innerHTML = "";
 
-      for (
-        let number = start;
-        number <= end;
-        number += 1
-      ) {
-        if (excludes.includes(number)) {
-          continue;
-        }
+      for (let number = start; number <= end; number += 1) {
+        if (excludes.includes(number)) continue;
 
         const card =
           document.createElement("div");
 
-        card.className =
-          "photo-card";
+        card.className = "photo-card";
 
         card.innerHTML = `
           <img
@@ -196,152 +155,86 @@ function initPhotoCarousels() {
     .querySelectorAll(".photo-carousel")
     .forEach((carousel) => {
       const wrap =
-        carousel.querySelector(
-          ".photo-track-wrap"
-        );
+        carousel.querySelector(".photo-track-wrap");
 
       const track =
-        carousel.querySelector(
-          ".photo-track"
-        );
+        carousel.querySelector(".photo-track");
 
       const prevBtn =
-        carousel.querySelector(
-          ".photo-prev"
-        );
+        carousel.querySelector(".photo-prev");
 
       const nextBtn =
-        carousel.querySelector(
-          ".photo-next"
-        );
+        carousel.querySelector(".photo-next");
 
-      if (
-        !wrap ||
-        !track ||
-        !prevBtn ||
-        !nextBtn
-      ) {
-        return;
-      }
+      if (!wrap || !track || !prevBtn || !nextBtn) return;
 
       function getStep() {
         const firstCard =
-          track.querySelector(
-            ".photo-card"
-          );
+          track.querySelector(".photo-card");
 
         const gap =
-          parseFloat(
-            getComputedStyle(track).gap
-          ) || 16;
+          parseFloat(getComputedStyle(track).gap) || 16;
 
-        return (
-          (firstCard?.offsetWidth || 220) +
-          gap
-        );
+        return (firstCard?.offsetWidth || 220) + gap;
       }
 
       function updateButtons() {
         const maxScroll =
-          Math.max(
-            0,
-            wrap.scrollWidth -
-            wrap.clientWidth
-          );
+          Math.max(0, wrap.scrollWidth - wrap.clientWidth);
 
         prevBtn.disabled =
           wrap.scrollLeft <= 2;
 
         nextBtn.disabled =
-          wrap.scrollLeft >=
-          maxScroll - 2;
+          wrap.scrollLeft >= maxScroll - 2;
       }
 
       function move(direction) {
         wrap.scrollTo({
-          left:
-            wrap.scrollLeft +
-            direction *
-            getStep() *
-            2,
-
+          left: wrap.scrollLeft + direction * getStep() * 2,
           behavior: "smooth"
         });
       }
 
-      prevBtn.addEventListener(
-        "click",
-        () => move(-1)
-      );
-
-      nextBtn.addEventListener(
-        "click",
-        () => move(1)
-      );
+      prevBtn.addEventListener("click", () => move(-1));
+      nextBtn.addEventListener("click", () => move(1));
 
       wrap.addEventListener(
         "scroll",
-        () =>
-          requestAnimationFrame(
-            updateButtons
-          ),
-        {
-          passive: true
-        }
+        () => requestAnimationFrame(updateButtons),
+        { passive: true }
       );
 
-      window.addEventListener(
-        "resize",
-        updateButtons
-      );
+      window.addEventListener("resize", updateButtons);
 
       let isDragging = false;
       let startX = 0;
       let startScroll = 0;
 
-      wrap.addEventListener(
-        "pointerdown",
-        (event) => {
-          isDragging = true;
+      wrap.addEventListener("pointerdown", (event) => {
+        isDragging = true;
+        startX = event.clientX;
+        startScroll = wrap.scrollLeft;
 
-          startX =
-            event.clientX;
+        wrap.setPointerCapture?.(event.pointerId);
+      });
 
-          startScroll =
-            wrap.scrollLeft;
+      wrap.addEventListener("pointermove", (event) => {
+        if (!isDragging) return;
 
-          wrap.setPointerCapture?.(
-            event.pointerId
-          );
-        }
-      );
-
-      wrap.addEventListener(
-        "pointermove",
-        (event) => {
-          if (!isDragging) return;
-
-          wrap.scrollLeft =
-            startScroll -
-            (
-              event.clientX -
-              startX
-            );
-        }
-      );
+        wrap.scrollLeft =
+          startScroll - (event.clientX - startX);
+      });
 
       [
         "pointerup",
         "pointercancel",
         "pointerleave"
       ].forEach((eventName) => {
-        wrap.addEventListener(
-          eventName,
-          () => {
-            isDragging = false;
-            updateButtons();
-          }
-        );
+        wrap.addEventListener(eventName, () => {
+          isDragging = false;
+          updateButtons();
+        });
       });
 
       updateButtons();
@@ -350,297 +243,247 @@ function initPhotoCarousels() {
 
 /* =====================================================
    INDEX INFORMATION POPUP
+   Support:
+   - Poster slide
+   - Video slide autoplay seperti iklan
+   - Video mati saat geser kanan / kiri
 ===================================================== */
 
 function initInfoPopup() {
   const popup =
-    document.getElementById(
-      "infoPopup"
-    );
+    document.getElementById("infoPopup");
 
   const openBtn =
-    document.getElementById(
-      "openInfo"
-    );
+    document.getElementById("openInfo");
 
   const closeBtn =
-    document.getElementById(
-      "infoClose"
-    );
+    document.getElementById("infoClose");
 
   const slider =
-    document.getElementById(
-      "infoSlider"
-    );
+    document.getElementById("infoSlider");
 
   const dotsWrap =
-    document.getElementById(
-      "infoDots"
-    );
+    document.getElementById("infoDots");
 
-  /*
-    Fungsi otomatis dilewati pada halaman
-    selain index.html.
-  */
-  if (
-    !popup ||
-    !closeBtn ||
-    !slider
-  ) {
-    return;
-  }
+  if (!popup || !closeBtn || !slider) return;
 
   const slides =
     Array.from(
-      slider.querySelectorAll(
-        ".info-slide"
-      )
+      slider.querySelectorAll(".info-slide")
     );
 
   const backdrop =
-    popup.querySelector(
-      "[data-close='true']"
-    );
+    popup.querySelector("[data-close='true']");
 
   let currentIndex = 0;
+  let scrollTimer = null;
+
+  function stopAllVideos(reset = true) {
+    popup
+      .querySelectorAll("video")
+      .forEach((video) => {
+        video.pause();
+
+        if (reset) {
+          try {
+            video.currentTime = 0;
+          } catch (error) {
+            console.log("Video tidak bisa di-reset.");
+          }
+        }
+      });
+  }
+
+  function playVideoOnActiveSlide() {
+    const activeSlide =
+      slides[currentIndex];
+
+    if (!activeSlide) return;
+
+    const activeVideo =
+      activeSlide.querySelector("video");
+
+    if (!activeVideo) return;
+
+    activeVideo.muted = true;
+    activeVideo.playsInline = true;
+
+    try {
+      activeVideo.currentTime = 0;
+    } catch (error) {
+      console.log("Video dimulai dari posisi tersedia.");
+    }
+
+    activeVideo
+      .play()
+      .catch(() => {
+        console.log("Autoplay video diblokir browser.");
+      });
+  }
 
   function updateDots() {
     dotsWrap
-      ?.querySelectorAll(
-        ".info-dot"
-      )
-      .forEach(
-        (dot, index) => {
-          dot.classList.toggle(
-            "active",
-            index === currentIndex
-          );
-        }
-      );
+      ?.querySelectorAll(".info-dot")
+      .forEach((dot, index) => {
+        dot.classList.toggle(
+          "active",
+          index === currentIndex
+        );
+      });
   }
 
-  function goToSlide(
-    index,
-    smooth = true
-  ) {
-    if (
-      slides.length === 0
-    ) {
-      return;
+  function getClosestSlideIndex() {
+    const center =
+      slider.getBoundingClientRect().left +
+      slider.clientWidth / 2;
+
+    let closestIndex = 0;
+    let closestDistance = Infinity;
+
+    slides.forEach((slide, index) => {
+      const rect =
+        slide.getBoundingClientRect();
+
+      const distance =
+        Math.abs(
+          rect.left + rect.width / 2 - center
+        );
+
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestIndex = index;
+      }
+    });
+
+    return closestIndex;
+  }
+
+  function setActiveSlide(index, playVideo = true) {
+    if (slides.length === 0) return;
+
+    const nextIndex =
+      (index + slides.length) % slides.length;
+
+    if (nextIndex !== currentIndex) {
+      stopAllVideos(true);
     }
 
+    currentIndex = nextIndex;
+
+    updateDots();
+
+    if (playVideo) {
+      playVideoOnActiveSlide();
+    }
+  }
+
+  function goToSlide(index, smooth = true) {
+    if (slides.length === 0) return;
+
+    stopAllVideos(true);
+
     currentIndex =
-      (
-        index +
-        slides.length
-      ) %
-      slides.length;
+      (index + slides.length) % slides.length;
 
-    slides[
-      currentIndex
-    ].scrollIntoView({
-      behavior:
-        smooth
-          ? "smooth"
-          : "auto",
-
+    slides[currentIndex].scrollIntoView({
+      behavior: smooth ? "smooth" : "auto",
       inline: "center",
       block: "nearest"
     });
 
     updateDots();
+
+    setTimeout(
+      playVideoOnActiveSlide,
+      smooth ? 320 : 80
+    );
   }
 
   function openPopup() {
-    popup.removeAttribute(
-      "hidden"
-    );
+    popup.removeAttribute("hidden");
+    document.body.classList.add("modal-open");
 
-    document.body.classList.add(
-      "modal-open"
-    );
-
-    goToSlide(
-      currentIndex,
-      false
-    );
+    goToSlide(currentIndex, false);
   }
 
   function closePopup() {
-    popup.setAttribute(
-      "hidden",
-      ""
-    );
+    stopAllVideos(true);
 
-    document.body.classList.remove(
-      "modal-open"
-    );
+    popup.setAttribute("hidden", "");
+    document.body.classList.remove("modal-open");
 
-    sessionStorage.setItem(
-      "picInfoSeen",
-      "true"
-    );
+    sessionStorage.setItem("picInfoSeen", "true");
   }
 
   if (dotsWrap) {
     dotsWrap.innerHTML = "";
 
-    slides.forEach(
-      (_, index) => {
-        const dot =
-          document.createElement(
-            "button"
-          );
+    slides.forEach((_, index) => {
+      const dot =
+        document.createElement("button");
 
-        dot.type =
-          "button";
+      dot.type = "button";
 
-        dot.className =
-          `info-dot${
-            index === 0
-              ? " active"
-              : ""
-          }`;
+      dot.className =
+        `info-dot${index === 0 ? " active" : ""}`;
 
-        dot.setAttribute(
-          "aria-label",
-          `Lihat poster ${index + 1}`
-        );
+      dot.setAttribute(
+        "aria-label",
+        `Lihat informasi ${index + 1}`
+      );
 
-        dot.addEventListener(
-          "click",
-          () =>
-            goToSlide(index)
-        );
+      dot.addEventListener("click", () =>
+        goToSlide(index)
+      );
 
-        dotsWrap.appendChild(
-          dot
-        );
-      }
-    );
+      dotsWrap.appendChild(dot);
+    });
   }
 
-  openBtn?.addEventListener(
-    "click",
-    openPopup
-  );
-
-  closeBtn.addEventListener(
-    "click",
-    closePopup
-  );
-
-  backdrop?.addEventListener(
-    "click",
-    closePopup
-  );
+  openBtn?.addEventListener("click", openPopup);
+  closeBtn.addEventListener("click", closePopup);
+  backdrop?.addEventListener("click", closePopup);
 
   slider.addEventListener(
     "scroll",
     () => {
-      requestAnimationFrame(
-        () => {
-          const center =
-            slider
-              .getBoundingClientRect()
-              .left +
-            slider.clientWidth /
-            2;
+      clearTimeout(scrollTimer);
 
-          let closestIndex = 0;
-          let closestDistance =
-            Infinity;
+      scrollTimer =
+        setTimeout(() => {
+          if (popup.hasAttribute("hidden")) return;
 
-          slides.forEach(
-            (slide, index) => {
-              const rect =
-                slide
-                  .getBoundingClientRect();
+          const closestIndex =
+            getClosestSlideIndex();
 
-              const distance =
-                Math.abs(
-                  rect.left +
-                  rect.width /
-                  2 -
-                  center
-                );
-
-              if (
-                distance <
-                closestDistance
-              ) {
-                closestDistance =
-                  distance;
-
-                closestIndex =
-                  index;
-              }
-            }
-          );
-
-          currentIndex =
-            closestIndex;
-
-          updateDots();
-        }
-      );
+          if (closestIndex !== currentIndex) {
+            setActiveSlide(closestIndex, true);
+          } else {
+            updateDots();
+          }
+        }, 160);
     },
-    {
-      passive: true
-    }
+    { passive: true }
   );
 
-  document.addEventListener(
-    "keydown",
-    (event) => {
-      if (
-        popup.hasAttribute(
-          "hidden"
-        )
-      ) {
-        return;
-      }
+  document.addEventListener("keydown", (event) => {
+    if (popup.hasAttribute("hidden")) return;
 
-      if (
-        event.key ===
-        "Escape"
-      ) {
-        closePopup();
-      }
-
-      if (
-        event.key ===
-        "ArrowRight"
-      ) {
-        goToSlide(
-          currentIndex + 1
-        );
-      }
-
-      if (
-        event.key ===
-        "ArrowLeft"
-      ) {
-        goToSlide(
-          currentIndex - 1
-        );
-      }
+    if (event.key === "Escape") {
+      closePopup();
     }
-  );
 
-  /*
-    Popup otomatis hanya muncul satu kali
-    dalam satu sesi browser.
-  */
-  if (
-    !sessionStorage.getItem(
-      "picInfoSeen"
-    )
-  ) {
-    setTimeout(
-      openPopup,
-      450
-    );
+    if (event.key === "ArrowRight") {
+      goToSlide(currentIndex + 1);
+    }
+
+    if (event.key === "ArrowLeft") {
+      goToSlide(currentIndex - 1);
+    }
+  });
+
+  if (!sessionStorage.getItem("picInfoSeen")) {
+    setTimeout(openPopup, 450);
   }
 }
 
@@ -650,57 +493,32 @@ function initInfoPopup() {
 
 function initPosterModal() {
   const modal =
-    document.getElementById(
-      "posterModal"
-    );
+    document.getElementById("posterModal");
 
   const modalImage =
-    document.getElementById(
-      "posterModalImage"
-    );
+    document.getElementById("posterModalImage");
 
   const modalTitle =
-    document.getElementById(
-      "posterModalTitle"
-    );
+    document.getElementById("posterModalTitle");
 
   const modalCaption =
-    document.getElementById(
-      "posterModalCaption"
-    );
+    document.getElementById("posterModalCaption");
 
   const modalLink =
-    document.getElementById(
-      "posterModalLink"
-    );
+    document.getElementById("posterModalLink");
 
   const closeBtn =
-    document.getElementById(
-      "posterModalClose"
-    );
+    document.getElementById("posterModalClose");
 
-  /*
-    Fungsi otomatis dilewati pada halaman
-    selain Epic.html.
-  */
-  if (
-    !modal ||
-    !modalImage ||
-    !modalTitle ||
-    !closeBtn
-  ) {
+  if (!modal || !modalImage || !modalTitle || !closeBtn) {
     return;
   }
 
   const backdrop =
-    modal.querySelector(
-      "[data-close='true']"
-    );
+    modal.querySelector("[data-close='true']");
 
   const tabButtons =
-    modal.querySelectorAll(
-      ".epic-tab-btn"
-    );
+    modal.querySelectorAll(".epic-tab-btn");
 
   function setTab(tab) {
     modal.classList.toggle(
@@ -713,131 +531,80 @@ function initPosterModal() {
       tab === "caption"
     );
 
-    tabButtons.forEach(
-      (button) => {
-        button.classList.toggle(
-          "active",
-          button.dataset.tab ===
-            tab
-        );
-      }
-    );
+    tabButtons.forEach((button) => {
+      button.classList.toggle(
+        "active",
+        button.dataset.tab === tab
+      );
+    });
   }
 
   function closeModal() {
-    modal.setAttribute(
-      "hidden",
-      ""
-    );
-
+    modal.setAttribute("hidden", "");
     modalImage.src = "";
-
-    document.body.classList.remove(
-      "modal-open"
-    );
+    document.body.classList.remove("modal-open");
   }
 
   document
-    .querySelectorAll(
-      ".poster-thumb"
-    )
+    .querySelectorAll(".poster-thumb")
     .forEach((button) => {
-      button.addEventListener(
-        "click",
-        () => {
-          const card =
-            button.closest(
-              ".poster-card"
-            );
+      button.addEventListener("click", () => {
+        const card =
+          button.closest(".poster-card");
 
-          const captionTemplate =
-            card?.querySelector(
-              ".poster-caption-template"
-            );
+        const captionTemplate =
+          card?.querySelector(".poster-caption-template");
 
-          const link =
-            button.dataset.link ||
-            "#";
+        const link =
+          button.dataset.link || "#";
 
-          modalImage.src =
-            button.dataset.full ||
-            button.querySelector(
-              "img"
-            )?.src ||
-            "";
+        modalImage.src =
+          button.dataset.full ||
+          button.querySelector("img")?.src ||
+          "";
 
-          modalTitle.textContent =
-            button.dataset.title ||
-            "Informasi PIC 2026";
+        modalTitle.textContent =
+          button.dataset.title ||
+          "Informasi PIC 2026";
 
-          if (modalCaption) {
-            modalCaption.innerHTML =
-              captionTemplate
-                ? captionTemplate
-                    .innerHTML
-                : "<p>Informasi detail belum tersedia.</p>";
-          }
-
-          if (modalLink) {
-            modalLink.href =
-              link;
-
-            modalLink.style.display =
-              link === "#"
-                ? "none"
-                : "inline-flex";
-          }
-
-          setTab("poster");
-
-          modal.removeAttribute(
-            "hidden"
-          );
-
-          document.body.classList.add(
-            "modal-open"
-          );
+        if (modalCaption) {
+          modalCaption.innerHTML =
+            captionTemplate
+              ? captionTemplate.innerHTML
+              : "<p>Informasi detail belum tersedia.</p>";
         }
-      );
+
+        if (modalLink) {
+          modalLink.href = link;
+
+          modalLink.style.display =
+            link === "#" ? "none" : "inline-flex";
+        }
+
+        setTab("poster");
+
+        modal.removeAttribute("hidden");
+        document.body.classList.add("modal-open");
+      });
     });
 
-  tabButtons.forEach(
-    (button) => {
-      button.addEventListener(
-        "click",
-        () =>
-          setTab(
-            button.dataset.tab ||
-            "poster"
-          )
-      );
+  tabButtons.forEach((button) => {
+    button.addEventListener("click", () =>
+      setTab(button.dataset.tab || "poster")
+    );
+  });
+
+  closeBtn.addEventListener("click", closeModal);
+  backdrop?.addEventListener("click", closeModal);
+
+  document.addEventListener("keydown", (event) => {
+    if (
+      event.key === "Escape" &&
+      !modal.hasAttribute("hidden")
+    ) {
+      closeModal();
     }
-  );
-
-  closeBtn.addEventListener(
-    "click",
-    closeModal
-  );
-
-  backdrop?.addEventListener(
-    "click",
-    closeModal
-  );
-
-  document.addEventListener(
-    "keydown",
-    (event) => {
-      if (
-        event.key ===
-          "Escape" &&
-        !modal.hasAttribute(
-          "hidden"
-        )
-      ) {
-        closeModal();
-      }
-    }
-  );
+  });
 }
 
 /* =====================================================
@@ -846,39 +613,21 @@ function initPosterModal() {
 
 function initQitFinalistSearch() {
   const dataElement =
-    document.getElementById(
-      "qitTeamsData"
-    );
+    document.getElementById("qitTeamsData");
 
   const teamCloud =
-    document.getElementById(
-      "qitTeamCloud"
-    );
+    document.getElementById("qitTeamCloud");
 
   const searchInput =
-    document.getElementById(
-      "qitSearchInput"
-    );
+    document.getElementById("qitSearchInput");
 
   const teamCount =
-    document.getElementById(
-      "qitTeamCount"
-    );
+    document.getElementById("qitTeamCount");
 
   const emptyMessage =
-    document.getElementById(
-      "qitEmptyMessage"
-    );
+    document.getElementById("qitEmptyMessage");
 
-  /*
-    Fungsi otomatis dilewati pada halaman
-    selain 5r.html.
-  */
-  if (
-    !dataElement ||
-    !teamCloud ||
-    !searchInput
-  ) {
+  if (!dataElement || !teamCloud || !searchInput) {
     return;
   }
 
@@ -886,9 +635,7 @@ function initQitFinalistSearch() {
 
   try {
     teams =
-      JSON.parse(
-        dataElement.textContent
-      );
+      JSON.parse(dataElement.textContent);
   } catch (error) {
     console.error(
       "Data team QIT tidak valid:",
@@ -898,20 +645,13 @@ function initQitFinalistSearch() {
     return;
   }
 
-  function render(
-    keyword = ""
-  ) {
+  function render(keyword = "") {
     const search =
-      keyword
-        .trim()
-        .toLowerCase();
+      keyword.trim().toLowerCase();
 
     const filteredTeams =
-      teams.filter(
-        (team) =>
-          team
-            .toLowerCase()
-            .includes(search)
+      teams.filter((team) =>
+        team.toLowerCase().includes(search)
       );
 
     teamCloud.innerHTML =
@@ -919,11 +659,7 @@ function initQitFinalistSearch() {
         .map(
           (team) => `
             <span
-              class="qit-team-pill${
-                search
-                  ? " is-match"
-                  : ""
-              }"
+              class="qit-team-pill${search ? " is-match" : ""}"
             >
               ${escapeHTML(team)}
             </span>
@@ -940,17 +676,12 @@ function initQitFinalistSearch() {
 
     emptyMessage?.classList.toggle(
       "show",
-      filteredTeams.length ===
-        0
+      filteredTeams.length === 0
     );
   }
 
-  searchInput.addEventListener(
-    "input",
-    () =>
-      render(
-        searchInput.value
-      )
+  searchInput.addEventListener("input", () =>
+    render(searchInput.value)
   );
 
   render();
@@ -962,20 +693,15 @@ function initQitFinalistSearch() {
 
 function initPlaceholderLinks() {
   document
-    .querySelectorAll(
-      "[data-placeholder-link]"
-    )
+    .querySelectorAll("[data-placeholder-link]")
     .forEach((link) => {
-      link.addEventListener(
-        "click",
-        (event) => {
-          event.preventDefault();
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
 
-          alert(
-            "Link form belum dimasukkan. Silakan ganti href pada HTML dengan link Google Form yang sesuai."
-          );
-        }
-      );
+        alert(
+          "Link form belum dimasukkan. Silakan ganti href pada HTML dengan link Google Form yang sesuai."
+        );
+      });
     });
 }
 
@@ -989,58 +715,33 @@ function initRevealAnimation() {
       ".section, .photo-review-section, .pre-form-section, .pic-story-section, .qit-finalist-premium"
     );
 
-  if (
-    !(
-      "IntersectionObserver" in
-      window
-    )
-  ) {
-    elements.forEach(
-      (element) =>
-        element.classList.add(
-          "is-visible"
-        )
+  if (!("IntersectionObserver" in window)) {
+    elements.forEach((element) =>
+      element.classList.add("is-visible")
     );
 
     return;
   }
 
-  elements.forEach(
-    (element) =>
-      element.classList.add(
-        "reveal"
-      )
+  elements.forEach((element) =>
+    element.classList.add("reveal")
   );
 
   const observer =
     new IntersectionObserver(
       (entries) => {
-        entries.forEach(
-          (entry) => {
-            if (
-              !entry.isIntersecting
-            ) {
-              return;
-            }
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
 
-            entry.target.classList.add(
-              "is-visible"
-            );
-
-            observer.unobserve(
-              entry.target
-            );
-          }
-        );
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
       },
-      {
-        threshold: 0.08
-      }
+      { threshold: 0.08 }
     );
 
-  elements.forEach(
-    (element) =>
-      observer.observe(element)
+  elements.forEach((element) =>
+    observer.observe(element)
   );
 }
 
@@ -1050,26 +751,11 @@ function initRevealAnimation() {
 
 function escapeHTML(value) {
   return String(value ?? "")
-    .replaceAll(
-      "&",
-      "&amp;"
-    )
-    .replaceAll(
-      "<",
-      "&lt;"
-    )
-    .replaceAll(
-      ">",
-      "&gt;"
-    )
-    .replaceAll(
-      '"',
-      "&quot;"
-    )
-    .replaceAll(
-      "'",
-      "&#039;"
-    );
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
 
 /* =====================================================
@@ -1078,21 +764,12 @@ function escapeHTML(value) {
 
 function initPageMusic() {
   const bgMusic =
-    document.getElementById(
-      "bgMusic"
-    );
+    document.getElementById("bgMusic");
 
   const musicToggle =
-    document.getElementById(
-      "musicToggle"
-    );
+    document.getElementById("musicToggle");
 
-  if (
-    !bgMusic ||
-    !musicToggle
-  ) {
-    return;
-  }
+  if (!bgMusic || !musicToggle) return;
 
   const STORAGE_ENABLED =
     "picMusicEnabled";
@@ -1100,236 +777,119 @@ function initPageMusic() {
   const STORAGE_TIME =
     "picMusicTime";
 
-  bgMusic.volume =
-    0.22;
+  bgMusic.volume = 0.22;
 
   function showPlayingButton() {
-    musicToggle.classList.add(
-      "is-playing"
-    );
-
-    musicToggle.classList.remove(
-      "is-muted"
-    );
+    musicToggle.classList.add("is-playing");
+    musicToggle.classList.remove("is-muted");
 
     musicToggle.innerHTML = `
-      <i
-        class="fa-solid fa-volume-high"
-      ></i>
-
-      <span
-        class="music-nav-text"
-      >
-        Music
-      </span>
+      <i class="fa-solid fa-volume-high"></i>
+      <span class="music-nav-text">Music</span>
     `;
 
-    musicToggle.setAttribute(
-      "aria-label",
-      "Matikan musik"
-    );
-
-    musicToggle.setAttribute(
-      "title",
-      "Matikan musik"
-    );
+    musicToggle.setAttribute("aria-label", "Matikan musik");
+    musicToggle.setAttribute("title", "Matikan musik");
   }
 
   function showMutedButton() {
-    musicToggle.classList.remove(
-      "is-playing"
-    );
-
-    musicToggle.classList.add(
-      "is-muted"
-    );
+    musicToggle.classList.remove("is-playing");
+    musicToggle.classList.add("is-muted");
 
     musicToggle.innerHTML = `
-      <i
-        class="fa-solid fa-volume-xmark"
-      ></i>
-
-      <span
-        class="music-nav-text"
-      >
-        Music
-      </span>
+      <i class="fa-solid fa-volume-xmark"></i>
+      <span class="music-nav-text">Music</span>
     `;
 
-    musicToggle.setAttribute(
-      "aria-label",
-      "Aktifkan musik"
-    );
-
-    musicToggle.setAttribute(
-      "title",
-      "Aktifkan musik"
-    );
+    musicToggle.setAttribute("aria-label", "Aktifkan musik");
+    musicToggle.setAttribute("title", "Aktifkan musik");
   }
 
   function saveCurrentTime() {
-    if (
-      Number.isFinite(
-        bgMusic.currentTime
-      )
-    ) {
+    if (Number.isFinite(bgMusic.currentTime)) {
       sessionStorage.setItem(
         STORAGE_TIME,
-        String(
-          bgMusic.currentTime
-        )
+        String(bgMusic.currentTime)
       );
     }
   }
 
   function restoreCurrentTime() {
     const savedTime =
-      Number(
-        sessionStorage.getItem(
-          STORAGE_TIME
-        ) || 0
-      );
+      Number(sessionStorage.getItem(STORAGE_TIME) || 0);
 
-    if (
-      Number.isFinite(
-        savedTime
-      ) &&
-      savedTime > 0
-    ) {
+    if (Number.isFinite(savedTime) && savedTime > 0) {
       try {
-        bgMusic.currentTime =
-          savedTime;
+        bgMusic.currentTime = savedTime;
       } catch (error) {
-        console.log(
-          "Musik dimulai dari awal."
-        );
+        console.log("Musik dimulai dari awal.");
       }
     }
   }
 
-  async function playMusic(
-    savePreference = true
-  ) {
+  async function playMusic(savePreference = true) {
     try {
       await bgMusic.play();
 
       if (savePreference) {
-        sessionStorage.setItem(
-          STORAGE_ENABLED,
-          "true"
-        );
+        sessionStorage.setItem(STORAGE_ENABLED, "true");
       }
 
       showPlayingButton();
     } catch (error) {
-      /*
-        Autoplay dapat diblokir browser.
-        Tombol manual tetap dapat digunakan.
-      */
       showMutedButton();
     }
   }
 
   function pauseMusic() {
     bgMusic.pause();
-
-    sessionStorage.setItem(
-      STORAGE_ENABLED,
-      "false"
-    );
-
+    sessionStorage.setItem(STORAGE_ENABLED, "false");
     saveCurrentTime();
-
     showMutedButton();
   }
 
-  musicToggle.addEventListener(
-    "click",
-    async (event) => {
-      event.preventDefault();
-      event.stopPropagation();
+  musicToggle.addEventListener("click", async (event) => {
+    event.preventDefault();
+    event.stopPropagation();
 
-      if (bgMusic.paused) {
-        await playMusic(true);
-      } else {
-        pauseMusic();
-      }
+    if (bgMusic.paused) {
+      await playMusic(true);
+    } else {
+      pauseMusic();
     }
-  );
+  });
 
-  bgMusic.addEventListener(
-    "play",
-    showPlayingButton
-  );
+  bgMusic.addEventListener("play", showPlayingButton);
+  bgMusic.addEventListener("playing", showPlayingButton);
+  bgMusic.addEventListener("pause", showMutedButton);
+  bgMusic.addEventListener("loadedmetadata", restoreCurrentTime);
 
-  bgMusic.addEventListener(
-    "playing",
-    showPlayingButton
-  );
+  window.addEventListener("pagehide", saveCurrentTime);
+  window.addEventListener("beforeunload", saveCurrentTime);
 
-  bgMusic.addEventListener(
-    "pause",
-    showMutedButton
-  );
-
-  bgMusic.addEventListener(
-    "loadedmetadata",
-    restoreCurrentTime
-  );
-
-  window.addEventListener(
-    "pagehide",
-    saveCurrentTime
-  );
-
-  window.addEventListener(
-    "beforeunload",
-    saveCurrentTime
-  );
-
-  setInterval(
-    saveCurrentTime,
-    1500
-  );
+  setInterval(saveCurrentTime, 1500);
 
   const savedPreference =
-    sessionStorage.getItem(
-      STORAGE_ENABLED
-    );
+    sessionStorage.getItem(STORAGE_ENABLED);
 
-  if (
-    savedPreference ===
-    "false"
-  ) {
+  if (savedPreference === "false") {
     showMutedButton();
-
     return;
   }
 
-  setTimeout(
-    () =>
-      playMusic(false),
-    250
-  );
+  setTimeout(() => playMusic(false), 250);
 
   document.addEventListener(
     "pointerdown",
     () => {
       const musicAllowed =
-        sessionStorage.getItem(
-          STORAGE_ENABLED
-        ) !== "false";
+        sessionStorage.getItem(STORAGE_ENABLED) !== "false";
 
-      if (
-        musicAllowed &&
-        bgMusic.paused
-      ) {
+      if (musicAllowed && bgMusic.paused) {
         playMusic(false);
       }
     },
-    {
-      once: true
-    }
+    { once: true }
   );
 }
 
@@ -1345,37 +905,17 @@ async function picApiPost(
     new AbortController();
 
   const timeout =
-    setTimeout(
-      () =>
-        controller.abort(),
-      15000
-    );
+    setTimeout(() => controller.abort(), 15000);
 
   try {
     const response =
-      await fetch(
-        PIC_API_URL,
-        {
-          method: "POST",
+      await fetch(PIC_API_URL, {
+        method: "POST",
+        body: JSON.stringify(payload),
+        signal: controller.signal
+      });
 
-          /*
-            Jangan tambahkan header application/json.
-            Format ini lebih aman untuk Web App
-            Google Apps Script.
-          */
-          body:
-            JSON.stringify(
-              payload
-            ),
-
-          signal:
-            controller.signal
-        }
-      );
-
-    if (
-      !response.ok
-    ) {
+    if (!response.ok) {
       throw new Error(
         `Server error HTTP ${response.status}`
       );
@@ -1385,50 +925,31 @@ async function picApiPost(
       await response.json();
 
     const message =
-      String(
-        result.message ||
-        ""
-      ).toLowerCase();
+      String(result.message || "").toLowerCase();
 
     const sessionExpired =
       !result.success &&
       (
-        message.includes(
-          "sesi login"
-        ) ||
-        message.includes(
-          "session"
-        ) ||
-        message.includes(
-          "token"
-        )
+        message.includes("sesi login") ||
+        message.includes("session") ||
+        message.includes("token")
       );
 
-    if (
-      sessionExpired &&
-      redirectOnExpiredSession
-    ) {
+    if (sessionExpired && redirectOnExpiredSession) {
       clearPicSession();
 
       alert(
         "Sesi login sudah berakhir. Silakan login kembali."
       );
 
-      window.location.replace(
-        "login.html"
-      );
+      window.location.replace("login.html");
 
-      throw new Error(
-        "Sesi login berakhir."
-      );
+      throw new Error("Sesi login berakhir.");
     }
 
     return result;
   } catch (error) {
-    if (
-      error.name ===
-      "AbortError"
-    ) {
+    if (error.name === "AbortError") {
       throw new Error(
         "Server terlalu lama merespons. Silakan coba kembali."
       );
@@ -1444,177 +965,91 @@ async function picApiPost(
    FINALIST LIKE AND COMMENT
 ===================================================== */
 
-/* =====================================================
-   FINALIST LIKE AND COMMENT — OPTIMIZED
-   - Like terasa instan menggunakan optimistic UI
-   - Komentar dibuka langsung tanpa menunggu API
-   - Cache komentar disimpan selama halaman aktif
-   - Data terbaru tetap disinkronkan dari server
-===================================================== */
-
 function initFinalistEngagement() {
   const cards =
     Array.from(
-      document.querySelectorAll(
-        ".interactive-finalist"
-      )
+      document.querySelectorAll(".interactive-finalist")
     );
 
-  /*
-    Fungsi dilewati otomatis pada halaman
-    selain Main Event.
-  */
-  if (cards.length === 0) {
-    return;
-  }
+  if (cards.length === 0) return;
 
   const sessionToken =
-    sessionStorage.getItem(
-      "picSessionToken"
-    );
+    sessionStorage.getItem("picSessionToken");
 
   if (!sessionToken) {
     clearPicSession();
-
-    window.location.replace(
-      "login.html"
-    );
-
+    window.location.replace("login.html");
     return;
   }
 
   const modal =
-    document.getElementById(
-      "commentModal"
-    );
+    document.getElementById("commentModal");
 
   const modalTitle =
-    document.getElementById(
-      "commentModalTitle"
-    );
+    document.getElementById("commentModalTitle");
 
   const modalSubtitle =
-    document.getElementById(
-      "commentModalSubtitle"
-    );
+    document.getElementById("commentModalSubtitle");
 
   const modalList =
-    document.getElementById(
-      "commentList"
-    );
+    document.getElementById("commentList");
 
   const modalForm =
-    document.getElementById(
-      "commentForm"
-    );
+    document.getElementById("commentForm");
 
   const modalInput =
-    document.getElementById(
-      "commentInput"
-    );
+    document.getElementById("commentInput");
 
   const modalSubmit =
-    document.getElementById(
-      "commentSubmit"
-    );
+    document.getElementById("commentSubmit");
 
   const modalStatus =
-    document.getElementById(
-      "commentStatus"
-    );
+    document.getElementById("commentStatus");
 
   const modalCounter =
-    document.getElementById(
-      "commentCharCount"
-    );
+    document.getElementById("commentCharCount");
 
   const modalClose =
-    document.getElementById(
-      "commentModalClose"
-    );
+    document.getElementById("commentModalClose");
 
   const modalBackdrop =
-    modal?.querySelector(
-      "[data-comment-close='true']"
-    );
+    modal?.querySelector("[data-comment-close='true']");
 
-  /*
-    Cache hanya berlaku selama halaman sedang dibuka.
-    Saat halaman di-refresh, data terbaru tetap diambil
-    kembali dari server.
-  */
   const commentCache =
     new Map();
 
-  /*
-    Mencegah request komentar ganda untuk item
-    yang sama ketika tombol ditekan berulang kali.
-  */
   const commentRequests =
     new Map();
 
-  let activeCard =
-    null;
+  let activeCard = null;
 
   cards.forEach((card) => {
-    ensureEngagementLabels(
-      card
-    );
+    ensureEngagementLabels(card);
 
     card
-      .querySelector(
-        "[data-like-button]"
-      )
-      ?.addEventListener(
-        "click",
-        () => {
-          toggleLikeOptimistically(
-            card
-          );
-        }
-      );
+      .querySelector("[data-like-button]")
+      ?.addEventListener("click", () => {
+        toggleLikeOptimistically(card);
+      });
 
     card
-      .querySelector(
-        "[data-comment-button]"
-      )
-      ?.addEventListener(
-        "click",
-        () => {
-          openCommentModal(
-            card
-          );
-        }
-      );
+      .querySelector("[data-comment-button]")
+      ?.addEventListener("click", () => {
+        openCommentModal(card);
+      });
   });
 
-  /*
-    Ambil jumlah Like dan Komentar ketika
-    halaman pertama kali dibuka.
-  */
   loadEngagementSummary();
-
-  /* =====================================================
-     ENGAGEMENT SUMMARY
-  ===================================================== */
 
   async function loadEngagementSummary() {
     try {
       const result =
         await picApiPost({
-          action:
-            "getEngagementSummary",
-
+          action: "getEngagementSummary",
           sessionToken,
-
-          itemIds:
-            cards
-              .map(
-                (card) =>
-                  card.dataset
-                    .itemId
-              )
-              .filter(Boolean)
+          itemIds: cards
+            .map((card) => card.dataset.itemId)
+            .filter(Boolean)
         });
 
       if (!result.success) {
@@ -1624,79 +1059,45 @@ function initFinalistEngagement() {
         );
       }
 
-      cards.forEach(
-        (card) => {
-          const summary =
-            result.items?.[
-              card.dataset
-                .itemId
-            ] ||
-            {
-              likeCount: 0,
-              commentCount: 0,
-              likedByCurrentUser:
-                false
-            };
+      cards.forEach((card) => {
+        const summary =
+          result.items?.[card.dataset.itemId] ||
+          {
+            likeCount: 0,
+            commentCount: 0,
+            likedByCurrentUser: false
+          };
 
-          updateLikeButton(
-            card,
-            summary
-              .likedByCurrentUser,
-            summary
-              .likeCount
-          );
+        updateLikeButton(
+          card,
+          summary.likedByCurrentUser,
+          summary.likeCount
+        );
 
-          updateCommentCount(
-            card,
-            summary
-              .commentCount
-          );
-        }
-      );
+        updateCommentCount(
+          card,
+          summary.commentCount
+        );
+      });
     } catch (error) {
-      console.error(
-        "Gagal memuat engagement:",
-        error
-      );
+      console.error("Gagal memuat engagement:", error);
     }
   }
 
-  /* =====================================================
-     LIKE OPTIMISTIC UI
-     Ikon dan angka berubah sebelum server merespons.
-  ===================================================== */
-
-  async function toggleLikeOptimistically(
-    card
-  ) {
+  async function toggleLikeOptimistically(card) {
     const button =
-      card.querySelector(
-        "[data-like-button]"
-      );
+      card.querySelector("[data-like-button]");
 
     const countElement =
-      card.querySelector(
-        ".like-count"
-      );
+      card.querySelector(".like-count");
 
-    if (
-      !button ||
-      button.disabled
-    ) {
-      return;
-    }
+    if (!button || button.disabled) return;
 
     const previousLiked =
-      button.classList.contains(
-        "is-liked"
-      );
+      button.classList.contains("is-liked");
 
     const previousCount =
-      Number(
-        countElement
-          ?.textContent ||
-        0
-      );
+      Number(countElement?.textContent || 0);
 
     const nextLiked =
       !previousLiked;
@@ -1704,48 +1105,22 @@ function initFinalistEngagement() {
     const nextCount =
       Math.max(
         0,
-        previousCount +
-        (
-          nextLiked
-            ? 1
-            : -1
-        )
+        previousCount + (nextLiked ? 1 : -1)
       );
 
-    /*
-      Perubahan langsung terlihat oleh pengguna.
-    */
-    updateLikeButton(
-      card,
-      nextLiked,
-      nextCount
-    );
+    updateLikeButton(card, nextLiked, nextCount);
 
-    button.disabled =
-      true;
-
-    button.classList.add(
-      "is-loading"
-    );
-
-    button.setAttribute(
-      "aria-busy",
-      "true"
-    );
+    button.disabled = true;
+    button.classList.add("is-loading");
+    button.setAttribute("aria-busy", "true");
 
     try {
       const result =
         await picApiPost({
-          action:
-            "toggleLike",
-
+          action: "toggleLike",
           sessionToken,
-
-          itemId:
-            card.dataset.itemId,
-
-          itemType:
-            card.dataset.itemType
+          itemId: card.dataset.itemId,
+          itemType: card.dataset.itemType
         });
 
       if (!result.success) {
@@ -1755,20 +1130,12 @@ function initFinalistEngagement() {
         );
       }
 
-      /*
-        Gunakan angka resmi dari server setelah
-        proses penyimpanan selesai.
-      */
       updateLikeButton(
         card,
         result.liked,
         result.likeCount
       );
     } catch (error) {
-      /*
-        Jika server gagal merespons, kembalikan
-        tampilan ke kondisi sebelumnya.
-      */
       updateLikeButton(
         card,
         previousLiked,
@@ -1780,27 +1147,13 @@ function initFinalistEngagement() {
         "Like tidak dapat disimpan. Silakan coba kembali."
       );
     } finally {
-      button.disabled =
-        false;
-
-      button.classList.remove(
-        "is-loading"
-      );
-
-      button.removeAttribute(
-        "aria-busy"
-      );
+      button.disabled = false;
+      button.classList.remove("is-loading");
+      button.removeAttribute("aria-busy");
     }
   }
 
-  /* =====================================================
-     OPEN COMMENT MODAL
-     Popup dibuka langsung tanpa menunggu server.
-  ===================================================== */
-
-  function openCommentModal(
-    card
-  ) {
+  function openCommentModal(card) {
     if (
       !modal ||
       !modalList ||
@@ -1811,19 +1164,16 @@ function initFinalistEngagement() {
       alert(
         "Popup komentar belum tersedia pada halaman Main Event."
       );
-
       return;
     }
 
-    activeCard =
-      card;
+    activeCard = card;
 
     const itemId =
       card.dataset.itemId;
 
     const itemName =
-      card.dataset.itemName ||
-      "Finalis";
+      card.dataset.itemName || "Finalis";
 
     modalTitle.textContent =
       `Komentar untuk ${itemName}`;
@@ -1831,41 +1181,18 @@ function initFinalistEngagement() {
     modalSubtitle.textContent =
       "Berikan dukungan dan apresiasi terbaikmu.";
 
-    modalInput.value =
-      "";
-
+    modalInput.value = "";
     updateCharacterCounter();
+    showCommentStatus("", "");
 
-    showCommentStatus(
-      "",
-      ""
-    );
+    modal.removeAttribute("hidden");
+    document.body.classList.add("modal-open");
 
-    /*
-      Popup langsung ditampilkan.
-    */
-    modal.removeAttribute(
-      "hidden"
-    );
-
-    document.body.classList.add(
-      "modal-open"
-    );
-
-    /*
-      Jika pernah dibuka sebelumnya, tampilkan
-      cache lebih dahulu.
-    */
     const cachedComments =
-      commentCache.get(
-        itemId
-      );
+      commentCache.get(itemId);
 
     if (cachedComments) {
-      renderComments(
-        cachedComments
-      );
-
+      renderComments(cachedComments);
       showCommentStatus(
         "Memeriksa komentar terbaru...",
         ""
@@ -1878,64 +1205,31 @@ function initFinalistEngagement() {
       modalInput.focus();
     }, 120);
 
-    /*
-      Refresh data terbaru berjalan tanpa membuat
-      popup tertahan.
-    */
-    refreshComments(
-      itemId
-    );
+    refreshComments(itemId);
   }
 
-  /* =====================================================
-     LOAD COMMENTS WITH CACHE
-  ===================================================== */
-
-  async function refreshComments(
-    itemId
-  ) {
-    /*
-      Jika request item yang sama masih berjalan,
-      gunakan request tersebut agar tidak duplikat.
-    */
-    if (
-      commentRequests.has(
-        itemId
-      )
-    ) {
-      return commentRequests.get(
-        itemId
-      );
+  async function refreshComments(itemId) {
+    if (commentRequests.has(itemId)) {
+      return commentRequests.get(itemId);
     }
 
     const request =
-      loadCommentsFromServer(
-        itemId
-      );
+      loadCommentsFromServer(itemId);
 
-    commentRequests.set(
-      itemId,
-      request
-    );
+    commentRequests.set(itemId, request);
 
     try {
       await request;
     } finally {
-      commentRequests.delete(
-        itemId
-      );
+      commentRequests.delete(itemId);
     }
   }
 
-  async function loadCommentsFromServer(
-    itemId
-  ) {
+  async function loadCommentsFromServer(itemId) {
     try {
       const result =
         await picApiPost({
-          action:
-            "getComments",
-
+          action: "getComments",
           sessionToken,
           itemId
         });
@@ -1948,22 +1242,13 @@ function initFinalistEngagement() {
       }
 
       const comments =
-        result.comments ||
-        [];
+        result.comments || [];
 
-      /*
-        Simpan ke cache halaman.
-      */
-      commentCache.set(
-        itemId,
-        comments
-      );
+      commentCache.set(itemId, comments);
 
       const relatedCard =
         cards.find(
-          (card) =>
-            card.dataset.itemId ===
-            itemId
+          (card) => card.dataset.itemId === itemId
         );
 
       if (relatedCard) {
@@ -1973,53 +1258,22 @@ function initFinalistEngagement() {
         );
       }
 
-      /*
-        Render hanya jika popup yang sedang aktif
-        masih menunjukkan finalis yang sama.
-      */
-      if (
-        activeCard?.dataset
-          .itemId ===
-        itemId
-      ) {
-        renderComments(
-          comments
-        );
-
-        showCommentStatus(
-          "",
-          ""
-        );
+      if (activeCard?.dataset.itemId === itemId) {
+        renderComments(comments);
+        showCommentStatus("", "");
       }
     } catch (error) {
-      console.error(
-        "Gagal memuat komentar:",
-        error
-      );
+      console.error("Gagal memuat komentar:", error);
 
-      /*
-        Jika cache tersedia, tetap gunakan cache.
-        Error tidak perlu menghilangkan komentar lama.
-      */
       if (
-        !commentCache.has(
-          itemId
-        ) &&
-        activeCard?.dataset
-          .itemId ===
-          itemId
+        !commentCache.has(itemId) &&
+        activeCard?.dataset.itemId === itemId
       ) {
         modalList.innerHTML = `
           <div class="comment-empty">
             <i class="fa-solid fa-triangle-exclamation"></i>
-
-            <p>
-              Komentar belum dapat dimuat.
-            </p>
-
-            <span>
-              Silakan coba kembali beberapa saat lagi.
-            </span>
+            <p>Komentar belum dapat dimuat.</p>
+            <span>Silakan coba kembali beberapa saat lagi.</span>
           </div>
         `;
       }
@@ -2031,271 +1285,153 @@ function initFinalistEngagement() {
     }
   }
 
-  /* =====================================================
-     CLOSE COMMENT MODAL
-  ===================================================== */
-
   function closeCommentModal() {
     if (!modal) return;
 
-    modal.setAttribute(
-      "hidden",
-      ""
-    );
-
-    document.body.classList.remove(
-      "modal-open"
-    );
-
-    activeCard =
-      null;
-
-    showCommentStatus(
-      "",
-      ""
-    );
+    modal.setAttribute("hidden", "");
+    document.body.classList.remove("modal-open");
+    activeCard = null;
+    showCommentStatus("", "");
   }
 
-  modalClose?.addEventListener(
-    "click",
-    closeCommentModal
-  );
+  modalClose?.addEventListener("click", closeCommentModal);
+  modalBackdrop?.addEventListener("click", closeCommentModal);
 
-  modalBackdrop?.addEventListener(
-    "click",
-    closeCommentModal
-  );
-
-  document.addEventListener(
-    "keydown",
-    (event) => {
-      if (
-        event.key ===
-          "Escape" &&
-        modal &&
-        !modal.hasAttribute(
-          "hidden"
-        )
-      ) {
-        closeCommentModal();
-      }
+  document.addEventListener("keydown", (event) => {
+    if (
+      event.key === "Escape" &&
+      modal &&
+      !modal.hasAttribute("hidden")
+    ) {
+      closeCommentModal();
     }
-  );
+  });
 
-  /* =====================================================
-     COMMENT SUBMIT — OPTIMISTIC UI
-     Komentar langsung muncul sambil server menyimpan.
-  ===================================================== */
+  modalForm?.addEventListener("submit", async (event) => {
+    event.preventDefault();
 
-  modalForm?.addEventListener(
-    "submit",
-    async (event) => {
-      event.preventDefault();
+    if (!activeCard || !modalInput || !modalSubmit) return;
 
-      if (
-        !activeCard ||
-        !modalInput ||
-        !modalSubmit
-      ) {
-        return;
-      }
+    const comment =
+      modalInput.value.trim();
 
-      const comment =
-        modalInput.value.trim();
-
-      if (!comment) {
-        showCommentStatus(
-          "Komentar tidak boleh kosong.",
-          "error"
-        );
-
-        return;
-      }
-
-      if (
-        comment.length >
-        300
-      ) {
-        showCommentStatus(
-          "Komentar maksimal 300 karakter.",
-          "error"
-        );
-
-        return;
-      }
-
-      const itemId =
-        activeCard.dataset
-          .itemId;
-
-      const itemType =
-        activeCard.dataset
-          .itemType;
-
-      const currentUserName =
-        getCurrentUserName();
-
-      const temporaryId =
-        `temporary-${Date.now()}`;
-
-      const optimisticComment = {
-        temporaryId,
-        timestamp:
-          new Date()
-            .toISOString(),
-
-        userName:
-          currentUserName,
-
-        comment
-      };
-
-      const previousComments =
-        commentCache.get(
-          itemId
-        ) ||
-        [];
-
-      const optimisticComments = [
-        optimisticComment,
-        ...previousComments
-      ];
-
-      /*
-        Komentar langsung muncul.
-      */
-      commentCache.set(
-        itemId,
-        optimisticComments
+    if (!comment) {
+      showCommentStatus(
+        "Komentar tidak boleh kosong.",
+        "error"
       );
+      return;
+    }
 
-      renderComments(
-        optimisticComments
+    if (comment.length > 300) {
+      showCommentStatus(
+        "Komentar maksimal 300 karakter.",
+        "error"
       );
+      return;
+    }
+
+    const itemId =
+      activeCard.dataset.itemId;
+
+    const itemType =
+      activeCard.dataset.itemType;
+
+    const currentUserName =
+      getCurrentUserName();
+
+    const temporaryId =
+      `temporary-${Date.now()}`;
+
+    const optimisticComment = {
+      temporaryId,
+      timestamp: new Date().toISOString(),
+      userName: currentUserName,
+      comment
+    };
+
+    const previousComments =
+      commentCache.get(itemId) || [];
+
+    const optimisticComments = [
+      optimisticComment,
+      ...previousComments
+    ];
+
+    commentCache.set(itemId, optimisticComments);
+    renderComments(optimisticComments);
+    updateCommentCount(activeCard, optimisticComments.length);
+
+    modalInput.value = "";
+    updateCharacterCounter();
+
+    modalSubmit.disabled = true;
+
+    modalSubmit.innerHTML = `
+      <i class="fa-solid fa-spinner fa-spin"></i>
+      Menyimpan...
+    `;
+
+    showCommentStatus("Menyimpan komentar...", "");
+
+    try {
+      const result =
+        await picApiPost({
+          action: "addComment",
+          sessionToken,
+          itemId,
+          itemType,
+          comment
+        });
+
+      if (!result.success) {
+        throw new Error(
+          result.message ||
+          "Komentar tidak dapat disimpan."
+        );
+      }
 
       updateCommentCount(
         activeCard,
-        optimisticComments.length
+        result.commentCount
       );
-
-      modalInput.value =
-        "";
-
-      updateCharacterCounter();
-
-      modalSubmit.disabled =
-        true;
-
-      modalSubmit.innerHTML = `
-        <i class="fa-solid fa-spinner fa-spin"></i>
-        Menyimpan...
-      `;
 
       showCommentStatus(
-        "Menyimpan komentar...",
-        ""
+        "Komentar berhasil dikirim.",
+        "success"
       );
 
-      try {
-        const result =
-          await picApiPost({
-            action:
-              "addComment",
-
-            sessionToken,
-            itemId,
-            itemType,
-            comment
-          });
-
-        if (!result.success) {
-          throw new Error(
-            result.message ||
-            "Komentar tidak dapat disimpan."
-          );
-        }
-
-        updateCommentCount(
-          activeCard,
-          result.commentCount
-        );
-
-        showCommentStatus(
-          "Komentar berhasil dikirim.",
-          "success"
-        );
-
-        /*
-          Ambil versi resmi dari server agar komentar
-          sementara diganti dengan data permanen.
-        */
-        await refreshComments(
-          itemId
-        );
-      } catch (error) {
-        /*
-          Hapus komentar sementara jika server gagal.
-        */
-        const restoredComments =
-          (
-            commentCache.get(
-              itemId
-            ) ||
-            []
-          ).filter(
-            (item) =>
-              item.temporaryId !==
-              temporaryId
+      await refreshComments(itemId);
+    } catch (error) {
+      const restoredComments =
+        (commentCache.get(itemId) || [])
+          .filter(
+            (item) => item.temporaryId !== temporaryId
           );
 
-        commentCache.set(
-          itemId,
-          restoredComments
-        );
+      commentCache.set(itemId, restoredComments);
+      renderComments(restoredComments);
+      updateCommentCount(activeCard, restoredComments.length);
 
-        renderComments(
-          restoredComments
-        );
+      modalInput.value = comment;
+      updateCharacterCounter();
 
-        updateCommentCount(
-          activeCard,
-          restoredComments.length
-        );
+      showCommentStatus(
+        error.message ||
+        "Komentar gagal disimpan. Silakan coba kembali.",
+        "error"
+      );
+    } finally {
+      modalSubmit.disabled = false;
 
-        /*
-          Kembalikan isi komentar agar pengguna
-          tidak perlu mengetik ulang.
-        */
-        modalInput.value =
-          comment;
-
-        updateCharacterCounter();
-
-        showCommentStatus(
-          error.message ||
-          "Komentar gagal disimpan. Silakan coba kembali.",
-          "error"
-        );
-      } finally {
-        modalSubmit.disabled =
-          false;
-
-        modalSubmit.innerHTML = `
-          <i class="fa-solid fa-paper-plane"></i>
-          Kirim
-        `;
-      }
+      modalSubmit.innerHTML = `
+        <i class="fa-solid fa-paper-plane"></i>
+        Kirim
+      `;
     }
-  );
+  });
 
-  modalInput?.addEventListener(
-    "input",
-    updateCharacterCounter
-  );
-
-  /* =====================================================
-     COMMENT UI HELPERS
-  ===================================================== */
+  modalInput?.addEventListener("input", updateCharacterCounter);
 
   function showCommentLoading() {
     if (!modalList) return;
@@ -2303,68 +1439,40 @@ function initFinalistEngagement() {
     modalList.innerHTML = `
       <div class="comment-loading">
         <i class="fa-solid fa-spinner fa-spin"></i>
-
-        <span>
-          Memuat komentar...
-        </span>
+        <span>Memuat komentar...</span>
       </div>
     `;
   }
 
   function updateCharacterCounter() {
-    if (
-      !modalInput ||
-      !modalCounter
-    ) {
-      return;
-    }
+    if (!modalInput || !modalCounter) return;
 
     modalCounter.textContent =
       `${modalInput.value.length}/300`;
   }
 
-  function showCommentStatus(
-    message,
-    type
-  ) {
+  function showCommentStatus(message, type) {
     if (!modalStatus) return;
 
-    modalStatus.textContent =
-      message;
-
-    modalStatus.className =
-      "comment-status";
+    modalStatus.textContent = message;
+    modalStatus.className = "comment-status";
 
     if (type) {
-      modalStatus.classList.add(
-        type
-      );
+      modalStatus.classList.add(type);
     }
   }
 
-  function renderComments(
-    comments
-  ) {
+  function renderComments(comments) {
     if (!modalList) return;
 
-    if (
-      comments.length ===
-      0
-    ) {
+    if (comments.length === 0) {
       modalList.innerHTML = `
         <div class="comment-empty">
           <i class="fa-regular fa-comments"></i>
-
-          <p>
-            Belum ada komentar.
-          </p>
-
-          <span>
-            Jadilah yang pertama memberikan apresiasi.
-          </span>
+          <p>Belum ada komentar.</p>
+          <span>Jadilah yang pertama memberikan apresiasi.</span>
         </div>
       `;
-
       return;
     }
 
@@ -2373,43 +1481,29 @@ function initFinalistEngagement() {
         .map(
           (item) => `
             <article
-              class="comment-item${
-                item.temporaryId
-                  ? " is-pending"
-                  : ""
-              }"
+              class="comment-item${item.temporaryId ? " is-pending" : ""}"
             >
               <div class="comment-avatar">
-                ${getInitial(
-                  item.userName
-                )}
+                ${getInitial(item.userName)}
               </div>
 
               <div class="comment-item-body">
                 <div class="comment-item-head">
                   <strong>
-                    ${escapeHTML(
-                      item.userName ||
-                      "User PIC 2026"
-                    )}
+                    ${escapeHTML(item.userName || "User PIC 2026")}
                   </strong>
 
                   <time>
                     ${
                       item.temporaryId
                         ? "Menyimpan..."
-                        : formatCommentDate(
-                            item.timestamp
-                          )
+                        : formatCommentDate(item.timestamp)
                     }
                   </time>
                 </div>
 
                 <p>
-                  ${escapeHTML(
-                    item.comment ||
-                    ""
-                  )}
+                  ${escapeHTML(item.comment || "")}
                 </p>
               </div>
             </article>
@@ -2422,10 +1516,7 @@ function initFinalistEngagement() {
     try {
       const storedUser =
         JSON.parse(
-          sessionStorage.getItem(
-            "picUser"
-          ) ||
-          "{}"
+          sessionStorage.getItem("picUser") || "{}"
         );
 
       return (
@@ -2439,55 +1530,31 @@ function initFinalistEngagement() {
     }
   }
 
-  function getInitial(
-    name
-  ) {
+  function getInitial(name) {
     return escapeHTML(
-      String(
-        name ||
-        "U"
-      )
+      String(name || "U")
         .trim()
         .charAt(0)
         .toUpperCase()
     );
   }
 
-  function formatCommentDate(
-    value
-  ) {
+  function formatCommentDate(value) {
     const date =
       new Date(value);
 
-    if (
-      Number.isNaN(
-        date.getTime()
-      )
-    ) {
-      return "";
-    }
+    if (Number.isNaN(date.getTime())) return "";
 
-    return new Intl
-      .DateTimeFormat(
-        "id-ID",
-        {
-          day:
-            "2-digit",
-
-          month:
-            "short",
-
-          year:
-            "numeric",
-
-          hour:
-            "2-digit",
-
-          minute:
-            "2-digit"
-        }
-      )
-      .format(date);
+    return new Intl.DateTimeFormat(
+      "id-ID",
+      {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+      }
+    ).format(date);
   }
 }
 
@@ -2495,94 +1562,59 @@ function initFinalistEngagement() {
    ENGAGEMENT UI HELPERS
 ===================================================== */
 
-function ensureEngagementLabels(
-  card
-) {
+function ensureEngagementLabels(card) {
   const likeButton =
-    card.querySelector(
-      "[data-like-button]"
-    );
+    card.querySelector("[data-like-button]");
 
   const commentButton =
-    card.querySelector(
-      "[data-comment-button]"
-    );
+    card.querySelector("[data-comment-button]");
 
   if (
     likeButton &&
-    !likeButton.querySelector(
-      ".engagement-label"
-    )
+    !likeButton.querySelector(".engagement-label")
   ) {
     const label =
-      document.createElement(
-        "span"
-      );
+      document.createElement("span");
 
-    label.className =
-      "engagement-label";
-
-    label.textContent =
-      "Like";
+    label.className = "engagement-label";
+    label.textContent = "Like";
 
     likeButton.insertBefore(
       label,
-      likeButton.querySelector(
-        ".like-count"
-      )
+      likeButton.querySelector(".like-count")
     );
   }
 
   if (
     commentButton &&
-    !commentButton.querySelector(
-      ".engagement-label"
-    )
+    !commentButton.querySelector(".engagement-label")
   ) {
     const label =
-      document.createElement(
-        "span"
-      );
+      document.createElement("span");
 
-    label.className =
-      "engagement-label";
-
-    label.textContent =
-      "Komentar";
+    label.className = "engagement-label";
+    label.textContent = "Komentar";
 
     commentButton.insertBefore(
       label,
-      commentButton.querySelector(
-        ".comment-count"
-      )
+      commentButton.querySelector(".comment-count")
     );
   }
 }
 
-function updateLikeButton(
-  card,
-  liked,
-  likeCount
-) {
+function updateLikeButton(card, liked, likeCount) {
   const button =
-    card.querySelector(
-      "[data-like-button]"
-    );
+    card.querySelector("[data-like-button]");
 
   if (!button) return;
 
-  button.classList.toggle(
-    "is-liked",
-    Boolean(liked)
-  );
+  button.classList.toggle("is-liked", Boolean(liked));
 
   const icon =
     button.querySelector("i");
 
   const count =
-    button.querySelector(
-      ".like-count"
-    );
+    button.querySelector(".like-count");
 
   if (icon) {
     icon.className =
@@ -2593,29 +1625,16 @@ function updateLikeButton(
 
   if (count) {
     count.textContent =
-      String(
-        Number(likeCount) ||
-        0
-      );
+      String(Number(likeCount) || 0);
   }
 }
 
-function updateCommentCount(
-  card,
-  commentCount
-) {
+function updateCommentCount(card, commentCount) {
   const count =
-    card.querySelector(
-      ".comment-count"
-    );
+    card.querySelector(".comment-count");
 
   if (count) {
     count.textContent =
-      String(
-        Number(
-          commentCount
-        ) ||
-        0
-      );
+      String(Number(commentCount) || 0);
   }
 }
