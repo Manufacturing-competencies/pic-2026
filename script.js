@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initInfoPopup();
   initPosterModal();
   initPhotoCarousels();
+  initDresscodeSlider();
   initLogout();
   initQitFinalistSearch();
   initPlaceholderLinks();
@@ -1644,4 +1645,92 @@ function updateCommentCount(card, commentCount) {
     count.textContent =
       String(Number(commentCount) || 0);
   }
+}
+
+/* =====================================================
+   DRESSCODE SLIDER
+===================================================== */
+
+function initDresscodeSlider() {
+  const slider =
+    document.getElementById("dresscodeSlider");
+
+  const prevBtn =
+    document.querySelector(".dresscode-prev");
+
+  const nextBtn =
+    document.querySelector(".dresscode-next");
+
+  if (!slider || !prevBtn || !nextBtn) return;
+
+  function getStep() {
+    const firstCard =
+      slider.querySelector(".dresscode-card");
+
+    const gap =
+      parseFloat(getComputedStyle(slider).gap) || 18;
+
+    return (firstCard?.offsetWidth || 240) + gap;
+  }
+
+  function updateButtons() {
+    const maxScroll =
+      Math.max(0, slider.scrollWidth - slider.clientWidth);
+
+    prevBtn.disabled =
+      slider.scrollLeft <= 2;
+
+    nextBtn.disabled =
+      slider.scrollLeft >= maxScroll - 2;
+  }
+
+  function move(direction) {
+    slider.scrollTo({
+      left: slider.scrollLeft + direction * getStep() * 2,
+      behavior: "smooth"
+    });
+  }
+
+  prevBtn.addEventListener("click", () => move(-1));
+  nextBtn.addEventListener("click", () => move(1));
+
+  slider.addEventListener(
+    "scroll",
+    () => requestAnimationFrame(updateButtons),
+    { passive: true }
+  );
+
+  window.addEventListener("resize", updateButtons);
+
+  let isDragging = false;
+  let startX = 0;
+  let startScroll = 0;
+
+  slider.addEventListener("pointerdown", (event) => {
+    isDragging = true;
+    startX = event.clientX;
+    startScroll = slider.scrollLeft;
+
+    slider.setPointerCapture?.(event.pointerId);
+  });
+
+  slider.addEventListener("pointermove", (event) => {
+    if (!isDragging) return;
+
+    slider.scrollLeft =
+      startScroll - (event.clientX - startX);
+  });
+
+  [
+    "pointerup",
+    "pointercancel",
+    "pointerleave"
+  ].forEach((eventName) => {
+    slider.addEventListener(eventName, () => {
+      isDragging = false;
+      updateButtons();
+    });
+  });
+
+  updateButtons();
 }
