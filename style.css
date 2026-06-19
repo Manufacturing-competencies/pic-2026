@@ -4898,3 +4898,38 @@ button{
     font-size:.82rem;
   }
 }
+
+/* =========================================================
+   FIX POSTER BOARD — GAMBAR TIDAK TERPOTONG
+   Berlaku untuk Information Board & Reward Information
+========================================================= */
+
+.poster-thumb{
+  width:100% !important;
+  height:auto !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  padding:8px !important;
+  background:#ffffff !important;
+}
+
+.poster-thumb img{
+  width:100% !important;
+  height:auto !important;
+  aspect-ratio:auto !important;
+  object-fit:contain !important;
+  object-position:center !important;
+  border-radius:16px !important;
+}
+
+/* Card reward dibuat lebih nyaman agar poster panjang tetap full */
+#reward .poster-card{
+  width:clamp(260px, 30vw, 360px) !important;
+}
+
+/* Khusus poster reward agar tidak dicrop */
+#reward .poster-thumb img{
+  max-height:none !important;
+  object-fit:contain !important;
+}
