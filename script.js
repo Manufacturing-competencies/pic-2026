@@ -1734,3 +1734,77 @@ function initDresscodeSlider() {
 
   updateButtons();
 }
+
+/* =====================================================
+   FAQ / QNA ACCORDION
+===================================================== */
+
+/* ==========================================
+   PIC 2026 FAQ PREMIUM FINAL
+========================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  /* TAB FAQ */
+
+  const tabs = document.querySelectorAll(".faq-tab");
+  const contents = document.querySelectorAll(".faq-content");
+
+  tabs.forEach(tab => {
+
+    tab.addEventListener("click", () => {
+
+      tabs.forEach(btn =>
+        btn.classList.remove("active")
+      );
+
+      contents.forEach(content =>
+        content.classList.remove("active")
+      );
+
+      tab.classList.add("active");
+
+      const target =
+        document.getElementById(
+          tab.dataset.tab
+        );
+
+      if(target){
+        target.classList.add("active");
+      }
+
+    });
+
+  });
+
+  /* ACCORDION FAQ */
+
+  document
+    .querySelectorAll(".faq-question")
+    .forEach(question => {
+
+      question.addEventListener("click", () => {
+
+        const item =
+          question.closest(".faq-item");
+
+        const active =
+          item.classList.contains("active");
+
+        item
+          .parentElement
+          .querySelectorAll(".faq-item")
+          .forEach(el => {
+            el.classList.remove("active");
+          });
+
+        if(!active){
+          item.classList.add("active");
+        }
+
+      });
+
+    });
+
+});
+
